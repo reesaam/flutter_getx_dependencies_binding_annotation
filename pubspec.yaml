@@ -17,8 +17,8 @@ dependencies:
   json_annotation: ^4.9.0
   # path: ^1.8.0
 
-  getx_dependencies_binding_annotation:
-    path: /lib/src/base.dart
+#  getx_dependencies_binding_annotation:
+#    path: ../flutter_getx_dependencies_binding_annotation/
 
 
 dev_dependencies:

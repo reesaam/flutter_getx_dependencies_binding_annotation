@@ -6,10 +6,10 @@ targets:
 
 builders:
   getx_dependencies_binding_annotation:
-    target: ":getx_dependencies_binding_annotation_generator"
+#    target: ":getx_dependencies_binding_annotation_generator"
     import: "package:getx_dependencies_binding_annotation_generator/builder.dart"
     builder_factories: ["getx_dependencies_binding_annotation"]
-    build_extensions: {".dart": [".getx_dependencies_binding_annotation.g.part"]}
+    build_extensions: {".dart": [".get_put.g.part"]}
     auto_apply: dependents
     build_to: cache
     applies_builders: ["source_gen|combining_builder"]
