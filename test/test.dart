@@ -1,16 +1,16 @@
-import 'package:flutter_getx_dependencies_binding_annotation/flutter_getx_dependencies_binding_annotation.dart';
+import 'package:getx_dependencies_binding_annotation/annotation.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('A group of tests', () {
-    final awesome = Awesome();
+    final getPut = GetPut();
 
     setUp(() {
       // Additional setup goes here.
     });
 
     test('First Test', () {
-      expect(awesome.isAwesome, isTrue);
+      expect(getPut, isTrue);
     });
   });
 }
