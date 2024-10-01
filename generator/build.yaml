@@ -1,0 +1,17 @@
+targets:
+  $default:
+    builders:
+      getx_dependencies_binding_annotation_generator|getx_dependencies_binding_annotation:
+        enabled: true
+      source_gen:combining_builder:
+        options:
+          build_extensions: { '{{}}.dart': ['{{}}.g.dart'] }
+
+builders:
+  getx_dependencies_binding_annotation:
+    import: "package:getx_dependencies_binding_annotation_generator/builder.dart"
+    builder_factories: ["getxDependenciesBindingAnnotation"]
+    build_extensions: { '{{}}.dart': ['{{}}.g.dart'] }
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]
