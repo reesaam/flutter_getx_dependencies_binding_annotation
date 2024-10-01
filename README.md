@@ -1,0 +1,2 @@
+# flutter_getx_binding_dependencies_annotation
+Flutter GetX Binding Dependencies Annotation
