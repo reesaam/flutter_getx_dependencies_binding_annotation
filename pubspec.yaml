@@ -2,24 +2,21 @@ name: getx_dependencies_binding_annotation
 description: Getx Dependencies Binding Annotation
 author: Resam Taghipour <resam.t@gmail.com>
 version: 0.0.1
+homepage: https://www.linkedin.com/in/resam
 repository: https://github.com/reesaam/flutter_getx_dependencies_binding_annotation
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: '>=3.1.4 <4.0.0'
 
 # Add regular dependencies here.
 dependencies:
   get: ^4.6.6
   build: ^2.4.1
-  build_runner: ^2.4.10
+  build_runner: ^2.4.9
   code_builder: ^4.10.0
-  dart_style: ^2.3.7
+  dart_style: ^2.3.6
   json_annotation: ^4.9.0
   # path: ^1.8.0
-
-#  getx_dependencies_binding_annotation:
-#    path: ../flutter_getx_dependencies_binding_annotation/
-
 
 dev_dependencies:
   build_config: ^1.1.1
