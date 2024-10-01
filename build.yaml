@@ -7,7 +7,7 @@ targets:
 builders:
   getx_dependencies_binding_annotation:
 #    target: ":getx_dependencies_binding_annotation_generator"
-    import: "package:getx_dependencies_binding_annotation_generator/builder.dart"
+    import: "package:getx_dependencies_binding_annotation/base.dart"
     builder_factories: ["getx_dependencies_binding_annotation"]
     build_extensions: {".dart": [".get_put.g.part"]}
     auto_apply: dependents
