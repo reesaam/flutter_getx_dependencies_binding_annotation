@@ -1,0 +1,17 @@
+
+import 'package:getx_dependencies_binding_annotation/annotation.dart';
+
+abstract class LocalDataSourceRepository {
+  loadData();
+  saveData();
+}
+
+@GetPut.repository
+class LocalDataSourceRepositoryImpl implements LocalDataSourceRepository {
+
+  @override
+  loadData() {}
+
+  @override
+  saveData() {}
+}
