@@ -1,4 +1,0 @@
-enum GetPutBuilderType {
-  getPage,
-  getController,
-}

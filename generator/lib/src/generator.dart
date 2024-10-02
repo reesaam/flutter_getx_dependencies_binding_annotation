@@ -7,6 +7,11 @@ import 'package:source_gen/source_gen.dart';
 class GetXDependenciesBindingGenerator extends GeneratorForAnnotation<GetPut> {
   @override
   FutureOr<String> generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
+
+    print(element);
+    print(annotation);
+    print(buildStep);
+
     return "// Hey! Annotation found!";
   }
 }
