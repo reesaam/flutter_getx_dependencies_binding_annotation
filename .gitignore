@@ -10,6 +10,7 @@
 annotation/.dart_tool/
 generator/.dart_tool/
 example/.dart_tool/
+example/build/
 
 # pubspec.lock
 pubspec.lock
