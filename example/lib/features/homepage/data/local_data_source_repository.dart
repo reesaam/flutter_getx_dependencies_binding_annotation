@@ -6,7 +6,7 @@ abstract class LocalDataSourceRepository {
   saveData();
 }
 
-@GetPut.repository
+@GetPut.repository(as: 'LocalDataSourceRepository')
 class LocalDataSourceRepositoryImpl implements LocalDataSourceRepository {
 
   @override

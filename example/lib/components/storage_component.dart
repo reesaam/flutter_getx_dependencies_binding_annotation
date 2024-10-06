@@ -5,7 +5,7 @@ abstract class StorageComponent {
   saveDataOnStorage();
 }
 
-@GetPut.component
+@GetPut.component()
 class StorageComponentImpl implements StorageComponent {
 
   @override

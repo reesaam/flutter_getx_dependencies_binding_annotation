@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+part 'main.get_put.dart';
+
 void main() => initProject();
 
 void initProject() async {
@@ -15,10 +17,10 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'GetX Dependencies Binding Annotation',
-      // initialBinding: CoreBindings(),
-      // getPages: AppPages.pages,
-      // initialRoute: AppRoutes.splashScreen.route,
-      // unknownRoute: AppPages.unknownRoute,
+      initialBinding: GetPutBindings(),
+      getPages: GetPutPages.pages,
+      initialRoute: GetPutPages.initialPage?.name,
+      unknownRoute: GetPutPages.unknownPage,
     );
   }
 }

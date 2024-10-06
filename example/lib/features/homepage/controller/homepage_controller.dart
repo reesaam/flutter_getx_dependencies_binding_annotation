@@ -2,7 +2,7 @@ import 'package:getx_dependencies_binding_annotation/annotation.dart';
 
 import '../../../core/core_controller.dart';
 
-@GetPut.controller
+@GetPut.controller()
 class HomePageController extends CoreController {
 
   @override

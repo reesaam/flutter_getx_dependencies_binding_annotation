@@ -6,7 +6,7 @@ abstract class RemoteDataSourceRepository {
   sendData();
 }
 
-@GetPut.repository
+@GetPut.repository(as: 'RemoteDataSourceRepository')
 class RemoteDataSourceRepositoryImpl implements RemoteDataSourceRepository {
 
   @override
