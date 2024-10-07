@@ -16,11 +16,11 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'GetX Dependencies Binding Annotation',
+      title: 'Getx Dependencies Binding Annotation Generator',
       initialBinding: GetPutBindings(),
       getPages: GetPutPages.pages,
-      // initialRoute: GetPutPages.initialPage?.name,
-      // unknownRoute: GetPutPages.unknownPage,
+      initialRoute: GetPutPages.initialRoute.name,
+      unknownRoute: GetPutPages.unknownRoute,
     );
   }
 }
