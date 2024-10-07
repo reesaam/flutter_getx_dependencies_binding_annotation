@@ -30,6 +30,7 @@ class DescriptionGenerator {
     return result;
   }
 
+  
   String get _caution => 'GENERATED CODE - DO NOT MODIFY BY HAND EVER';
   String get _packageName => 'getx_dependencies_binding_annotation_generator';
   String get _packageNameDescription => 'Getx Dependencies Binding Annotation Generator';
