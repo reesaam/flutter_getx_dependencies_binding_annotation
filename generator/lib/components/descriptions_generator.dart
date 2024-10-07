@@ -1,3 +1,4 @@
+import '../resources/constants.dart';
 import '../resources/info.dart';
 
 class DescriptionGenerator {
@@ -23,6 +24,9 @@ class DescriptionGenerator {
       _addLine('      - Controllers');
       _addLine('      - Components');
       _addLine('      - Repositories');
+      _addSpace();
+      _addLine('Generator will generate a file with \'.$generatedFilesPrefix.dart\' format in the lib/ root fot using in \'main.dart\'');
+      _addLine('You can see how to use the generated class in the main in the GetMaterialApp as [example]');
       _addBigSpace();
     }
     if (all == true || packageInfo == true) {
