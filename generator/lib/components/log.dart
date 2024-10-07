@@ -9,21 +9,26 @@ class log {
   final _logColorsError = ['\x1B[31m', '\x1B[0m'];
 
   final String? title;
+  final String? as;
   final dynamic data;
 
-  log({this.title, this.data}) {
-    print('${_logColorsNormal[0]}[$elementsMainName] $title$_nullData ${data}${_logColorsNormal[1]}');
+  log({this.title, this.data}) : as = null {
+    print('${_logColorsNormal[0]}[$elementsMainName] $title $_data ${_logColorsNormal[1]}');
   }
 
-  log.info({this.title, this.data}) {
-    print('${_logColorsInfo[0]}[$elementsMainName] [${LogType.info.typeName}] $title$_nullData ${data}${_logColorsInfo[1]}');
+  log.info({this.title, this.data, this.as}) {
+    print('${_logColorsInfo[0]}[$elementsMainName] [${LogType.info.typeName}] $title $_data $_as ${_logColorsInfo[1]}');
   }
-  log.warning({this.title, this.data}) {
-    print('${_logColorsWarning[0]}[$elementsMainName] [${LogType.warning.typeName}] $title$_nullData ${data}${_logColorsWarning[1]}');
+  log.warning({this.title, this.data, this.as}) {
+    print('${_logColorsWarning[0]}[$elementsMainName] [${LogType.warning.typeName}] $title $_data $_as ${_logColorsWarning[1]}');
   }
-  log.error({this.title, this.data}) {
-    print('${_logColorsError[0]}[$elementsMainName] [${LogType.error.typeName}] $title$_nullData ${data}${_logColorsError[1]}');
+  log.error({this.title, this.data}) : as = null  {
+    print('${_logColorsError[0]}[$elementsMainName] [${LogType.error.typeName}] $title $_data ${_logColorsError[1]}');
+  }
+  log.space() : title = null, data = null, as = null  {
+    print('\n');
   }
 
-  String get _nullData => data == null ? '' : ':';
+  String get _data => data == null ? '' : ':  $data';
+  String get _as => as == null ? '' : 'as $as';
 }

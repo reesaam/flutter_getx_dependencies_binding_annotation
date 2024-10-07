@@ -16,16 +16,21 @@ class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
   @override
   FutureOr<String> generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) async {
 
-    log.info(title: 'Annotation Found in', data: element.source?.uri.path);
-    log(title: 'Annotation Build Started for', data: element.name);
     ExtractedInfoModel dataModel = ExtractedInfoModel(
       element: element,
+      source: element.source?.uri.path ?? Strings.unknown,
       type: element.metadata.first.element?.name?.getAnnotationType ?? AnnotationTypes.unknown,
       name: element.name ?? Strings.unknown,
       as: annotation.getAs,
       initialRoute: annotation.getIsInitial,
       unknownRoute: annotation.getIsUnknownRoute,
     );
+
+    log.info(title: 'Annotation Found in', data: dataModel.source);
+    log.info(title: 'Annotation Name', data: dataModel.name, as: dataModel.as);
+    log.info(title: 'Annotation Type', data: dataModel.type);
+    log.space();
+
     CodeGenerator().addElement(dataModel);
     return Strings.empty;
   }

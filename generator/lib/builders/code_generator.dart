@@ -13,11 +13,11 @@ import '../resources/strings.dart';
 
 class CodeGenerator extends Generator {
 
-  static List<String> importsList = List<String>.empty(growable: true);
-  static List<String> pagesList = List<String>.empty(growable: true);
-  static List<String> controllersList = List<String>.empty(growable: true);
-  static List<String> componentsList = List<String>.empty(growable: true);
-  static List<String> repositoriesList = List<String>.empty(growable: true);
+  static List<ExtractedInfoModel> importsList = List<ExtractedInfoModel>.empty(growable: true);
+  static List<ExtractedInfoModel> pagesList = List<ExtractedInfoModel>.empty(growable: true);
+  static List<ExtractedInfoModel> controllersList = List<ExtractedInfoModel>.empty(growable: true);
+  static List<ExtractedInfoModel> componentsList = List<ExtractedInfoModel>.empty(growable: true);
+  static List<ExtractedInfoModel> repositoriesList = List<ExtractedInfoModel>.empty(growable: true);
 
   @override
   FutureOr<String?> generate(LibraryReader library, BuildStep buildStep) async {
@@ -26,6 +26,8 @@ class CodeGenerator extends Generator {
     String statisticsCodeBody = Strings.empty;
     String importsCodeBody = Strings.empty;
     String pagesCodeBody = Strings.empty;
+    String initialPageString = Strings.empty;
+    String unknownPageString = Strings.empty;
     String controllersCodeBody = Strings.empty;
     String componentsCodeBody = Strings.empty;
     String repositoriesCodeBody = Strings.empty;
@@ -35,19 +37,17 @@ class CodeGenerator extends Generator {
 
     bool canGenerate = library.element.source.uri.path.contains(ImportDependencies.main.url);
     if(canGenerate) {
-      log(title: 'Code Generation Started');
+      log(title: 'Code Generation Started...');
 
       /// Imports
       importsCodeBody = importsCodeBody.addImport(ImportDependencies.main.url);
       importsCodeBody = importsCodeBody.addImport(ImportDependencies.get.url);
       for(var import in importsList) {
-        importsCodeBody = importsCodeBody.addImport(import.correctImport);
+        importsCodeBody = importsCodeBody.addImport(_findSourceImport(import).correctImport);
       }
 
       ///Statistics
-      statisticsCodeBody = statisticsCodeBody.addCommentLine('Generated Library');
-      statisticsCodeBody = statisticsCodeBody.addCommentLine('$elementsMainName Main Library');
-      statisticsCodeBody = statisticsCodeBody.addCommentLine('$elementsMainName Statistics:');
+      statisticsCodeBody = statisticsCodeBody.addCommentLine('Generated Library Statistics:');
       statisticsCodeBody = statisticsCodeBody.addCommentLine('  Imports Count: ${importsList.length}');
       statisticsCodeBody = statisticsCodeBody.addCommentLine('  Pages Count: ${pagesList.length}');
       statisticsCodeBody = statisticsCodeBody.addCommentLine('  Controllers Count: ${controllersList.length}');
@@ -55,29 +55,33 @@ class CodeGenerator extends Generator {
       statisticsCodeBody = statisticsCodeBody.addCommentLine('  Repositories Count: ${repositoriesList.length}');
 
       /// Bodies Generation
+      // Pages
       String pages = Strings.empty;
       for (var page in pagesList) {
-        pages = pages.addLine(page);
-        log.info(title: 'Page Added to Pages', data: page);
+        pages = pages.addLine('${_pageDependencyFormat(page)},');
+        log.info(title: 'Page Added to Pages', data: page.name, as: page.as);
       }
 
-      // initialPageString = 'GetPage(name: \'/${page}\', page: ${page}.new)';
-      // unknownPageString = 'GetPage(name: \'/${page}\', page: ${page}.new)';
-      // pagesBody = pagesBody.addLine('static GetPage? initialPage = ${initialPageString.isEmpty ? null : initialPageString};');
-      // pagesBody = pagesBody.addLine('static GetPage? unknownPage = ${unknownPageString.isEmpty ? null : unknownPageString};');
-      pagesCodeBody = pagesCodeBody.addClass(className: '${AnnotationTypes.page.name.capitalizeFirst}s', body: 'static List<GetPage> get ${AnnotationTypes.page.name}s => [${pages}\n];');
+      initialPageString = 'static GetPage get initialRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.initialRoute == true))};';
+      unknownPageString = 'static GetPage get unknownRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.unknownRoute == true))};';
+      pagesCodeBody = pagesCodeBody.addClass(className: '${AnnotationTypes.page.name.capitalizeFirst}s', body: 'static List<GetPage> get ${AnnotationTypes.page.name}s => [${pages}\n]; $initialPageString $unknownPageString');
 
+      //Controllers
       for(var controller in controllersList) {
-        controllersCodeBody = controllersCodeBody.addLine(controller);
-        log.info(title: 'Controller Added to Pages', data: controller);
+        controllersCodeBody = controllersCodeBody.addLine(_controllerDependencyFormat(controller));
+        log.info(title: 'Controller Added to Pages', data: controller.name, as: controller.as);
       }
+
+      //Components
       for(var component in componentsList) {
-        componentsCodeBody = componentsCodeBody.addLine(component);
-        log.info(title: 'Component Added to Pages', data: component);
+        componentsCodeBody = componentsCodeBody.addLine(_controllerDependencyFormat(component));
+        log.info(title: 'Component Added to Pages', data: component.name, as: component.as);
       }
+
+      //Repositories
       for(var repository in repositoriesList) {
-        repositoriesCodeBody = repositoriesCodeBody.addLine(repository);
-        log.info(title: 'Repository Added to Pages', data: repository);
+        repositoriesCodeBody = repositoriesCodeBody.addLine(_controllerDependencyFormat(repository));
+        log.info(title: 'Repository Added to Pages', data: repository.name, as: repository.as);
       }
 
       dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.controller.name.capitalizeFirst, body: controllersCodeBody);
@@ -91,14 +95,14 @@ class CodeGenerator extends Generator {
 
       /// CodeBody Generation
       // mainCodeBody = mainCodeBody.addLine('part \'main.dart\';').addSpace();
-      mainCodeBody = mainCodeBody.addCommentLine(DescriptionGenerator().generate()).addSpace();
+      mainCodeBody = mainCodeBody.addCommentLine(DescriptionGenerator().generate(all: true)).addSpace();
       mainCodeBody = mainCodeBody.addLine(importsCodeBody).addSpace();
       mainCodeBody = mainCodeBody.addLine(statisticsCodeBody).addSpace();
       mainCodeBody = mainCodeBody.addLine(pagesCodeBody).addSpace();
       mainCodeBody = mainCodeBody.addBindingClass(body: bindingsCodeBody).addSpace();
       mainCodeBody = mainCodeBody.addLine(dependenciesCodeBody).addSpace();
 
-      log(title: 'Code Generation Finished');
+      log(title: 'Code Generation Finished...');
     }
 
     bool canPublish = mainCodeBody.isNotEmpty && canGenerate;
@@ -107,16 +111,16 @@ class CodeGenerator extends Generator {
 
   addElement(ExtractedInfoModel element) {
     switch(element.type) {
-      case AnnotationTypes.page: pagesList.add(_pageDependencyFormat(element)); break;
-      case AnnotationTypes.controller: controllersList.add(_controllerDependencyFormat(element)); break;
-      case AnnotationTypes.component: componentsList.add(_controllerDependencyFormat(element)); break;
-      case AnnotationTypes.repository: repositoriesList.add(_controllerDependencyFormat(element)); break;
+      case AnnotationTypes.page: pagesList.add(element); break;
+      case AnnotationTypes.controller: controllersList.add(element); break;
+      case AnnotationTypes.component: componentsList.add(element); break;
+      case AnnotationTypes.repository: repositoriesList.add(element); break;
       default: break;
     }
-    importsList.add(_findSourceImport(element));
+    importsList.add(element);
   }
 
-  String _findSourceImport(ExtractedInfoModel element) => element.element.source!.uri.path;
-  String _pageDependencyFormat(ExtractedInfoModel element) => 'GetPage(name: \'/${element.name}\', page: ${element.name}.new),';
+  String _findSourceImport(ExtractedInfoModel element) => element.source;
+  String _pageDependencyFormat(ExtractedInfoModel element) => 'GetPage(name: \'/${element.name}\', page: ${element.name}.new)';
   String _controllerDependencyFormat(ExtractedInfoModel element) => 'Get.lazyPut<${element.as ?? element.name}>(() => ${element.name}(), fenix: ${fenix});';
 }
