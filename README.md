@@ -154,8 +154,10 @@ class NotFoundController extends GetxController {}
 ```
 `Storage Component:`
 ```dart
-@GetPut.component(as: 'Storage')
-class StorageComponent {}
+abstract class StorageComponent {}
+
+@GetPut.component(as: 'StorageComponent')
+class StorageComponentImpl {}
 ```
 `Remote DataSource Repository:`
 ```dart

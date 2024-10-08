@@ -6,6 +6,8 @@ environment:
   sdk: ^3.5.3
 
 dependencies:
+  flutter:
+    sdk: flutter
   get: ^4.6.6
   getx_dependencies_binding_annotation:
     path: ../annotation/

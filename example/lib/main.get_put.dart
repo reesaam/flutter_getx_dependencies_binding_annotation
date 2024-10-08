@@ -4,6 +4,8 @@
 // CodeGenerator
 // **************************************************************************
 
+library;
+
 /// ///  GENERATED CODE - DO NOT MODIFY BY HAND EVER
 
 ///  Dependencies binding annotation generator for [ GetX State Manager ]
@@ -14,6 +16,9 @@
 ///        - Controllers
 ///        - Components
 ///        - Repositories
+
+///  Generator will generate a file with '.get_put.dart' format in the lib/ root fot using in 'main.dart'
+///  You can see how to use the generated class in the main in the GetMaterialApp as [example]
 
 ///  Package:
 ///    Package Last Version: [ 1.0.0 ]
@@ -31,8 +36,8 @@
 
 import 'main.dart';
 import 'package:get/get.dart';
-import 'components/storage_component.dart';
 import 'features/homepage/data/local_data_source_repository.dart';
+import 'components/storage_component.dart';
 import 'features/homepage/data/remote_data_source_repository.dart';
 import 'features/homepage/controller/homepage_controller.dart';
 import 'features/not_found/controller/not_found_controller.dart';
@@ -77,8 +82,7 @@ class _GetPutController extends Bindings {
 class _GetPutComponent extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<StorageComponentImpl>(() => StorageComponentImpl(),
-        fenix: true);
+    Get.lazyPut<StorageComponent>(() => StorageComponentImpl(), fenix: true);
   }
 }
 

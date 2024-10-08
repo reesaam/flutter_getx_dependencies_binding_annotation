@@ -1,0 +1,14 @@
+# General Folders
+.idea/
+
+# .dart_tool
+.dart_tool/
+annotation/.dart_tool/
+generator/.dart_tool/
+example/.dart_tool/
+
+# pubspec.lock
+pubspec.lock
+annotation/pubspec.lock
+generator/pubspec.lock
+example/pubspec.lock
