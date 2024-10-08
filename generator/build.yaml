@@ -32,9 +32,3 @@ builders:
     auto_apply: dependents
     build_to: source
     applies_builders: [ "source_gen|combining_builder" ]
-
-global_options:
-  getx_dependencies_binding_annotation_builder:
-    runs_before:
-      - getx_dependencies_binding_code_generator
-

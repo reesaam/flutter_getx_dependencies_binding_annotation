@@ -5,17 +5,22 @@ author: Resam Taghipour <resam.t@gmail.com>
 homepage: https://www.linkedin.com/in/resam/
 repository: https://github.com/reesaam/flutter_getx_dependencies_binding_annotation
 
-
 environment:
-  sdk: '>=3.1.4 <4.0.0'
+  sdk: ^3.5.3
 
 dependencies:
-  analyzer: '6.4.1'
+  analyzer: ^6.4.1
   build: ^2.4.1
+  build_runner: ^2.4.13
   build_config: ^1.1.1
+  build_verify: ^3.1.0
+  code_builder: ^4.10.0
+  build_test: ^2.2.2
   source_gen: ^1.5.0
+  dartdoc: ^8.0.8
   getx_dependencies_binding_annotation:
     path: ../annotation/
 
 dev_dependencies:
+  lints: ^4.0.0
   test: ^1.24.0
