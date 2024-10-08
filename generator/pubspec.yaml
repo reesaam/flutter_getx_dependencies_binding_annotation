@@ -1,7 +1,6 @@
 name: getx_dependencies_binding_annotation_generator
 description: Getx Dependencies Binding Annotation Generator
-version: 1.0.0
-author: Resam Taghipour <resam.t@gmail.com>
+version: 0.0.1
 homepage: https://www.linkedin.com/in/resam/
 repository: https://github.com/reesaam/flutter_getx_dependencies_binding_annotation
 

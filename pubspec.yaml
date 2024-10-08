@@ -1,0 +1,21 @@
+name: getx_binding_annotation
+description: Getx Binding Annotation
+version: 0.0.1
+homepage: https://www.linkedin.com/in/resam
+repository: https://github.com/reesaam/flutter_getx_dependencies_binding_annotation
+publish_to: https://pub.dev/
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  build_runner: ^2.4.13
+  dartdoc: ^8.0.8
