@@ -1,4 +1,4 @@
-import 'package:getx_dependencies_binding_annotation/annotation.dart';
+import 'package:getx_dependencies_binding_annotation/getx_dependencies_binding_annotation.dart';
 
 abstract class StorageComponent {
   loadDataFromStorage();
