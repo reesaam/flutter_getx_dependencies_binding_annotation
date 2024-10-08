@@ -2,7 +2,6 @@
 .idea/
 
 # General File Types
-*.iml
 *.g.dart
 
 # .dart_tool
