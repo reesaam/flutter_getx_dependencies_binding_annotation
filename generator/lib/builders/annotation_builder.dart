@@ -12,10 +12,19 @@ import '../resources/strings.dart';
 import 'code_generator.dart';
 import '../components/log.dart';
 
+/// This class will find the Annotation, Extract Data then Fill it in the Model to pass to the main generator class to generate the Code
+///
+/// The DataModel includes the source element itself and extracted useful data that we know will use them a lot
+/// so, those useful data seperated and assigned a specific field for them
+/// we would not process the demanded data everytime
+///
+/// Logs will notify that an annotation has founded, then it will show details about that
+
 class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
   @override
   FutureOr<String> generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) async {
 
+    // Extracting Data from all Elements and filling the data into a model to use everywhere
     ExtractedInfoModel dataModel = ExtractedInfoModel(
       element: element,
       source: element.source?.uri.path ?? Strings.unknown,
@@ -26,11 +35,13 @@ class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
       unknownRoute: annotation.getIsUnknownRoute,
     );
 
+    // Logging details about founded Annotation
     log.info(title: 'Annotation Found in', data: dataModel.source);
     log.info(title: 'Annotation Name', data: dataModel.name, as: dataModel.as);
     log.info(title: 'Annotation Type', data: dataModel.type);
     log.space();
 
+    // Adding the Element in the main Generator
     CodeGenerator().addElement(dataModel);
     return Strings.empty;
   }

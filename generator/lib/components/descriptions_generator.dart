@@ -1,6 +1,9 @@
 import '../resources/constants.dart';
 import '../resources/info.dart';
 
+/// This class will provide descriptions and comments
+/// I wrote this class for my use, so I can generate and add comment will some flags and have a much less code and comment writing
+
 class DescriptionGenerator {
   String result = '';
 

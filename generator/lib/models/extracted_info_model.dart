@@ -11,5 +11,13 @@ class ExtractedInfoModel {
   final bool? initialRoute;
   final bool? unknownRoute;
 
-  ExtractedInfoModel({required this.name, this.as, required this.element, required this.source, required this.type, this.initialRoute, this.unknownRoute});
+  ExtractedInfoModel({
+    required this.name,
+    this.as,
+    required this.element,
+    required this.source,
+    required this.type,
+    this.initialRoute,
+    this.unknownRoute,
+  });
 }
