@@ -7,3 +7,8 @@
 
 # 0.0.1
   - First released Version
+
+# 0.0.2
+  - BugFixes
+  - Add Some Details
+  - ReadMe
