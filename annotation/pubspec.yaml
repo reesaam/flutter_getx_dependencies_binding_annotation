@@ -1,4 +1,4 @@
-name: getx_dependencies_binding_annotation
+name: getx_binding_annotation
 description: Getx Dependencies Binding Annotation
 version: 0.0.2
 homepage: https://www.linkedin.com/in/resam
@@ -10,7 +10,7 @@ environment:
 dependencies:
   build_runner: ^2.4.13
   dartdoc: ^8.0.8
-  getx_dependencies_binding_annotation_generator:
+  getx_binding_annotation_generator:
     path: ../generator/
 
 dev_dependencies:

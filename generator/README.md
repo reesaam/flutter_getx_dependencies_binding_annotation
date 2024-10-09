@@ -55,11 +55,11 @@ Add dependencies in the `pubspec.yaml`:
 ```yaml
 dependencies:
   get: ^latest
-  getx_dependencies_binding_annotation: ^latest
+  getx_binding_annotation: ^latest
 
 dev_dependencies:
   build_runner: ^latest
-  getx_dependencies_binding_annotation_generator: ^latest
+  getx_binding_annotation_generator: ^latest
 ```
 
 Get the Changes by:
@@ -74,7 +74,7 @@ dart pub get
 ## Usage
 
 ```dart
-import 'package:getx_dependencies_binding_annotation/getx_dependencies_binding_annotation.dart';
+import 'package:getx_binding_annotation/getx_binding_annotation.dart';
 ```
 
 Add desired `@Annotation` on top of the desired class and set the desired Options.

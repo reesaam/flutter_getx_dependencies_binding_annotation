@@ -1,5 +1,5 @@
 class PackageAuthorInfo {
-  static String get packageName => 'getx_dependencies_binding_annotation_generator';
+  static String get packageName => 'getx_binding_annotation_generator';
   static String get packageNameDescription => 'Getx Dependencies Binding Annotation Generator';
   static String get packageAddress => '** Will Add in Next Update after First Publish **';
   static String get packageGitHubRepositoryAddress => 'https://github.com/reesaam/flutter_getx_dependencies_binding_annotation';

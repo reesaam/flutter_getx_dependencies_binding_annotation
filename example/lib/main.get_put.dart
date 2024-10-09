@@ -22,7 +22,7 @@ library;
 
 ///  Package:
 ///    Package Last Version: [ 1.0.0 ]
-///    Package Name: [ getx_dependencies_binding_annotation_generator ]
+///    Package Name: [ getx_binding_annotation_generator ]
 ///    Package Description: [ Getx Dependencies Binding Annotation Generator ]
 ///    Package Address: [ ** Will Add in Next Update after First Publish ** ]
 ///    Package GitHubRepositoryAddress: [ https://github.com/reesaam/flutter_getx_dependencies_binding_annotation ]
@@ -36,13 +36,13 @@ library;
 
 import 'main.dart';
 import 'package:get/get.dart';
+import 'features/homepage/data/local_data_source_repository.dart';
 import 'components/storage_component.dart';
 import 'features/homepage/data/remote_data_source_repository.dart';
-import 'features/homepage/data/local_data_source_repository.dart';
 import 'features/homepage/controller/homepage_controller.dart';
-import 'features/not_found/controller/not_found_controller.dart';
 import 'features/homepage/view/homepage_view.dart';
 import 'features/not_found/view/not_found_view.dart';
+import 'features/not_found/controller/not_found_controller.dart';
 
 /// Generated Library Statistics:
 ///   Imports Count: 7
@@ -89,11 +89,11 @@ class _GetPutComponent extends Bindings {
 class _GetPutRepository extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<RemoteDataSourceRepository>(
-        () => RemoteDataSourceRepositoryImpl(),
-        fenix: true);
     Get.lazyPut<LocalDataSourceRepository>(
         () => LocalDataSourceRepositoryImpl(),
+        fenix: true);
+    Get.lazyPut<RemoteDataSourceRepository>(
+        () => RemoteDataSourceRepositoryImpl(),
         fenix: true);
   }
 }
