@@ -64,7 +64,6 @@ class CodeGenerator extends Generator {
       log(title: 'Code Generation Started...');
 
       /// Imports
-      importsCodeBody = importsCodeBody.addImport(ImportDependencies.main.url);
       importsCodeBody = importsCodeBody.addImport(ImportDependencies.get.url);
       for(var import in importsList) {
         importsCodeBody = importsCodeBody.addImport(_findSourceImport(import).correctImport);

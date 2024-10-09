@@ -12,3 +12,9 @@
   - BugFixes
   - Add Some Details
   - ReadMe
+
+# 0.0.3
+  - ReadMe
+
+# 0.0.4
+  - Bugfix

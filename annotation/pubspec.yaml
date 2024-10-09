@@ -10,8 +10,6 @@ environment:
 dependencies:
   build_runner: ^2.4.13
   dartdoc: ^8.0.8
-  getx_binding_annotation_generator:
-    path: ../generator/
 
 dev_dependencies:
   lints: ^4.0.0
