@@ -1,30 +1,17 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
 <p align="center">
   Getx Dependencies Binding Annotation Generator
 </p>
 <p align="center">
   <!-- Pub Version -->
-  <a href="https://pub.dev/packages/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/pub/v/getx_binding_annotation?logo=dart" alt="PubVersion"></a>
+  <a href="https://pub.dev/packages/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/pub/v/getx_binding_annotation?logo=dart" alt="pub-version"></a>
   <!-- Pub Points} -->
-  <a href="https://pub.dev/packages/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/pub/points/getx_binding_annotation?logo=dart" alt="PubPoints"></a>
+  <a href="https://pub.dev/packages/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/pub/points/getx_binding_annotation?logo=dart" alt="pub-points"></a>
   <!-- GitHub Repo -->
-  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/repo-Getx_Binding_Annotation-yellowgreen?logo=github" alt="build"></a>
+  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/repo-Getx_Binding_Annotation-yellowgreen?logo=github" alt="github-repo"></a>
   <!-- GitHub Stars -->
-  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/github/stars/felangel/bloc.svg?style=flat&logo=github&colorB=deeppink&label=stars" alt="Star on Github"></a>
+  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/github/stars/felangel/bloc.svg?style=flat&logo=github&colorB=deeppink&label=stars" alt="github-repo-stars"></a>
   <!-- DartDoc -->
-  <a href="https://pub.dev/documentation/flutter_getx_dependencies_binding_annotation/latest"><img src="https://img.shields.io/badge/dartdocs-latest-blue.svg" alt="Latest Dartdocs"></a>
+  <a href="https://pub.dev/documentation/flutter_getx_dependencies_binding_annotation/latest"><img src="https://img.shields.io/badge/dartdocs-latest-blue.svg" alt="dartdoc"></a>
 </p>
 <p align="center">
   <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/Android-black?logo=android" alt="android"></a>
@@ -180,26 +167,26 @@ class RemoteDataSourceRepository {}
 ```
 
 ## Docs
-<a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation/tree/main/generator/doc/api"><img src="https://img.shields.io/badge/GitHub-Docs_Repository-important?logo=github" alt="build"></a>
+<a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation/tree/main/generator/doc/api"><img src="https://img.shields.io/badge/GitHub-Docs_Repository-important?logo=github" alt="package-docs"></a>
 
 ## About Author
 
 ### Resam Taghipour
-<a href="https://www.resam.site"><img src="https://img.shields.io/badge/Website-resam.site-blue" alt="Pub"></a>
-<a href="https://github.com/reesaam"><img src="https://img.shields.io/badge/GitHub-reesaam-black?style=flat&logo=github&link=https%3A%2F%2Fgithub.com%2Freesaam" alt="account"></a>
-<a href="https://www.linkedin.com/in/resam"><img src="https://img.shields.io/badge/LinkedIn-resam-blue?logo=linkedin" alt="Pub"></a>
-<a href="emailto:resam.t@gmail.com"><img src="https://img.shields.io/badge/Gmail-resam.t-red?logo=gmail" alt="Pub"></a>
-<a href="emailto:resam@resam.site"><img src="https://img.shields.io/badge/Email-resam-important?logo=maildotru" alt="Pub"></a>
+<a href="https://www.resam.site"><img src="https://img.shields.io/badge/Website-resam.site-blue" alt="resam.site"></a>
+<a href="https://github.com/reesaam"><img src="https://img.shields.io/badge/GitHub-reesaam-black?style=flat&logo=github&link=https%3A%2F%2Fgithub.com%2Freesaam" alt="github-account"></a>
+<a href="https://www.linkedin.com/in/resam"><img src="https://img.shields.io/badge/LinkedIn-resam-blue?logo=linkedin" alt="resam-linkedin"></a>
+<a href="emailto:resam.t@gmail.com"><img src="https://img.shields.io/badge/Gmail-resam.t-red?logo=gmail" alt="resam-gmail"></a>
+<a href="emailto:resam@resam.site"><img src="https://img.shields.io/badge/Email-resam-important?logo=maildotru" alt="resam.site-email"></a>
 
 
 ## Packages and Dependencies
-<a href="https://dart.dev"><img src="https://img.shields.io/badge/Dart-red?logo=dart" alt="Pub"></a>
-<a href="https://flutter.dev"><img src="https://img.shields.io/badge/Flutter-blue?logo=flutter" alt="Pub"></a>
-<a href="https://pub.dev/packages/get"><img src="https://img.shields.io/badge/pub-GetX-blue?logo=dart" alt="Pub"></a>
-<a href="https://pub.dev/packages/build_runner"><img src="https://img.shields.io/badge/pub-BuildRunner-red?logo=dart" alt="Pub"></a>
-<a href="https://pub.dev/packages/dartdoc"><img src="https://img.shields.io/badge/pub-DartDoc-red?logo=dart" alt="Pub"></a>
+<a href="https://dart.dev"><img src="https://img.shields.io/badge/Dart-red?logo=dart" alt="dart"></a>
+<a href="https://flutter.dev"><img src="https://img.shields.io/badge/Flutter-blue?logo=flutter" alt="flutter"></a>
+<a href="https://pub.dev/packages/get"><img src="https://img.shields.io/badge/pub-GetX-blue?logo=dart" alt="get"></a>
+<a href="https://pub.dev/packages/build_runner"><img src="https://img.shields.io/badge/pub-BuildRunner-red?logo=dart" alt="build-runner"></a>
+<a href="https://pub.dev/packages/dartdoc"><img src="https://img.shields.io/badge/pub-DartDoc-red?logo=dart" alt="dart-doc"></a>
 
 ## License
 This project is licensed under the '**BSD-3-Clause**' License - see the LICENSE for details.
 
-<a href="https://pub.dev/packages/getx_binding_annotation/license"><img src="https://img.shields.io/badge/LICENSE-blue" alt="Pub"></a>
+<a href="https://pub.dev/packages/getx_binding_annotation/license"><img src="https://img.shields.io/badge/LICENSE-blue" alt="license"></a>
