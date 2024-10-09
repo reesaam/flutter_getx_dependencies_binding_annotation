@@ -12,3 +12,6 @@
   - BugFixes
   - Add Some Details
   - ReadMe
+
+# 0.0.3
+  - ReadMe Update
