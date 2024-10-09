@@ -36,9 +36,9 @@ library;
 
 import 'main.dart';
 import 'package:get/get.dart';
-import 'features/homepage/data/local_data_source_repository.dart';
 import 'components/storage_component.dart';
 import 'features/homepage/data/remote_data_source_repository.dart';
+import 'features/homepage/data/local_data_source_repository.dart';
 import 'features/homepage/controller/homepage_controller.dart';
 import 'features/not_found/controller/not_found_controller.dart';
 import 'features/homepage/view/homepage_view.dart';
@@ -89,11 +89,11 @@ class _GetPutComponent extends Bindings {
 class _GetPutRepository extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<LocalDataSourceRepository>(
-        () => LocalDataSourceRepositoryImpl(),
-        fenix: true);
     Get.lazyPut<RemoteDataSourceRepository>(
         () => RemoteDataSourceRepositoryImpl(),
+        fenix: true);
+    Get.lazyPut<LocalDataSourceRepository>(
+        () => LocalDataSourceRepositoryImpl(),
         fenix: true);
   }
 }
