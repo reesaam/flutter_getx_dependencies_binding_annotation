@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:build/src/builder/build_step.dart';
+import 'package:dart_style/dart_style.dart';
 import 'package:source_gen/source_gen.dart';
 import '../components/descriptions_generator.dart';
 import '../components/log.dart';
@@ -10,18 +11,16 @@ import '../extensions/string.dart';
 import '../resources/strings.dart';
 
 class CodeGenerator extends Generator {
-
   /// List Variables to keep the data and then we will use them when generating the code
   /// This way everything, especially generating the code do so much faster and more efficient
-  static List<ExtractedInfoModel> importsList = List<ExtractedInfoModel>.empty(growable: true);
-  static List<ExtractedInfoModel> pagesList = List<ExtractedInfoModel>.empty(growable: true);
-  static List<ExtractedInfoModel> controllersList = List<ExtractedInfoModel>.empty(growable: true);
-  static List<ExtractedInfoModel> componentsList = List<ExtractedInfoModel>.empty(growable: true);
-  static List<ExtractedInfoModel> repositoriesList = List<ExtractedInfoModel>.empty(growable: true);
+  static Set<String> importsList = Set<String>.new();
+  static Set<ExtractedInfoModel> pagesList = Set<ExtractedInfoModel>.new();
+  static Set<ExtractedInfoModel> controllersList = Set<ExtractedInfoModel>.new();
+  static Set<ExtractedInfoModel> componentsList = Set<ExtractedInfoModel>.new();
+  static Set<ExtractedInfoModel> repositoriesList = Set<ExtractedInfoModel>.new();
 
   @override
   FutureOr<String?> generate(LibraryReader library, BuildStep buildStep) async {
-
     /// String Variables
     /// These variables will keep strings of generated code separately
     /// [statisticsCodeBody] the package will generate some statistics about received code which will put at the top of generated code
@@ -58,13 +57,14 @@ class CodeGenerator extends Generator {
     /// generator could generate everywhere and with every file
     /// it will be restricted this way to generate specific file and save resources
     bool canGenerate = library.element.source.uri.path.contains(ImportDependencies.main.url);
-    if(canGenerate) {
+    if (canGenerate) {
       GeneratorLog(title: 'Code Generation Started...');
 
       /// Imports
       importsCodeBody = importsCodeBody.addImport(ImportDependencies.get.url);
-      for(var import in importsList) {
-        importsCodeBody = importsCodeBody.addImport(_findSourceImport(import).correctImport);
+      importsCodeBody = importsCodeBody.addImport(ImportDependencies.main.url);
+      for (var import in importsList) {
+        if (!import.contains('/${ImportDependencies.main.url}')) importsCodeBody = importsCodeBody.addImport(import);
       }
 
       ///Statistics
@@ -85,22 +85,23 @@ class CodeGenerator extends Generator {
 
       initialPageString = 'static GetPage get initialRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.initialRoute == true))};';
       unknownPageString = 'static GetPage get unknownRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.unknownRoute == true))};';
-      pagesCodeBody = pagesCodeBody.addClass(className: '${AnnotationTypes.page.name.capitalizeFirst}s', body: 'static List<GetPage> get ${AnnotationTypes.page.name}s => [${pages}\n]; $initialPageString $unknownPageString');
+      pagesCodeBody = pagesCodeBody.addClass(
+          className: '${AnnotationTypes.page.name.capitalizeFirst}s', body: 'static List<GetPage> get ${AnnotationTypes.page.name}s => [${pages}\n]; $initialPageString $unknownPageString');
 
       //Controllers
-      for(var controller in controllersList) {
+      for (var controller in controllersList) {
         controllersCodeBody = controllersCodeBody.addLine(_controllerDependencyFormat(controller));
         GeneratorLog.info(title: 'Controller Added to Pages', data: controller.name, as: controller.as);
       }
 
       //Components
-      for(var component in componentsList) {
+      for (var component in componentsList) {
         componentsCodeBody = componentsCodeBody.addLine(_controllerDependencyFormat(component));
         GeneratorLog.info(title: 'Component Added to Pages', data: component.name, as: component.as);
       }
 
       //Repositories
-      for(var repository in repositoriesList) {
+      for (var repository in repositoriesList) {
         repositoriesCodeBody = repositoriesCodeBody.addLine(_controllerDependencyFormat(repository));
         GeneratorLog.info(title: 'Repository Added to Pages', data: repository.name, as: repository.as);
       }
@@ -112,7 +113,6 @@ class CodeGenerator extends Generator {
       bindingsCodeBody = bindingsCodeBody.addLine('_$elementsMainName${AnnotationTypes.controller.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
       bindingsCodeBody = bindingsCodeBody.addLine('_$elementsMainName${AnnotationTypes.component.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
       bindingsCodeBody = bindingsCodeBody.addLine('_$elementsMainName${AnnotationTypes.repository.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
-
 
       /// CodeBody Generation
       mainCodeBody = mainCodeBody.addLine('library;').addSpace();
@@ -133,19 +133,27 @@ class CodeGenerator extends Generator {
   /// This function is responsible to get the specific element that we need to process
   /// and pull it from everywhere in the codebase to here to add and keep in the lists
   addElement(ExtractedInfoModel element) {
-    switch(element.type) {
-      case AnnotationTypes.page: pagesList.add(element); break;
-      case AnnotationTypes.controller: controllersList.add(element); break;
-      case AnnotationTypes.component: componentsList.add(element); break;
-      case AnnotationTypes.repository: repositoriesList.add(element); break;
-      default: break;
+    switch (element.type) {
+      case AnnotationTypes.page:
+        pagesList.add(element);
+        break;
+      case AnnotationTypes.controller:
+        controllersList.add(element);
+        break;
+      case AnnotationTypes.component:
+        componentsList.add(element);
+        break;
+      case AnnotationTypes.repository:
+        repositoriesList.add(element);
+        break;
+      default:
+        break;
     }
-    importsList.add(element);
+    importsList.add(element.source.correctImport);
   }
 
   /// These functions are helping generating the Strings and being unified
   /// these are mostly general concepts and may use several places, so we can change them here to have the change everywhere easily
-  String _findSourceImport(ExtractedInfoModel element) => element.source;
-  String _pageDependencyFormat(ExtractedInfoModel element) => 'GetPage(name: \'/${element.name}\', page: ${element.name}.new)';
+  String _pageDependencyFormat(ExtractedInfoModel element) => 'GetPage(name: \'/${element.as ?? element.name}\', page: ${element.name}.new)';
   String _controllerDependencyFormat(ExtractedInfoModel element) => 'Get.lazyPut<${element.as ?? element.name}>(() => ${element.name}(), fenix: ${fenix});';
 }

@@ -35,20 +35,14 @@ library;
 ///    GitHub: [ https://github.com/reesaam ]
 
 import 'package:get/get.dart';
-import 'components/storage_component.dart';
-import 'features/homepage/data/local_data_source_repository.dart';
-import 'features/homepage/data/remote_data_source_repository.dart';
-import 'features/homepage/controller/homepage_controller.dart';
-import 'features/homepage/view/homepage_view.dart';
-import 'features/not_found/controller/not_found_controller.dart';
-import 'features/not_found/view/not_found_view.dart';
+import 'main.dart';
 
 /// Generated Library Statistics:
-///   Imports Count: 7
+///   Imports Count: 1
 ///   Pages Count: 2
 ///   Controllers Count: 2
 ///   Components Count: 1
-///   Repositories Count: 2
+///   Repositories Count: 1
 
 class GetPutPages {
   static List<GetPage> get pages => [
@@ -89,10 +83,7 @@ class _GetPutComponent extends Bindings {
 class _GetPutRepository extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<LocalDataSourceRepository>(
-        () => LocalDataSourceRepositoryImpl(),
-        fenix: true);
-    Get.lazyPut<RemoteDataSourceRepository>(
+    Get.lazyPut<RemoteDataSourceRepositoryImpl>(
         () => RemoteDataSourceRepositoryImpl(),
         fenix: true);
   }

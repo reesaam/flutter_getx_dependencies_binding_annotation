@@ -15,7 +15,7 @@ library;
 import 'enums.dart';
 
 class GetPut {
-  final String? as;
+  final Type? as;
   final String? route;
   final bool? isInitial;
   final bool? isUnknown;

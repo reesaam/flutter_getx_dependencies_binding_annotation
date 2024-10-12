@@ -1,0 +1,11 @@
+linter:
+  rules:
+    prefer_relative_imports: true
+    prefer_single_quotes: true
+
+analyzer:
+  errors:
+    invalid_assignment: error
+    missing_return: warning
+    unused_import: warning
+    unrelated_type_equality_checks: warning
