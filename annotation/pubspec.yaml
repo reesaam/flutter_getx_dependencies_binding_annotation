@@ -1,8 +1,8 @@
 name: getx_binding_annotation
 description: A Code Generator Plugin to Generate Pages and Dependencies for GetX State Manager base on Annotation.
-version: 0.0.6
-homepage: https://www.linkedin.com/in/resam
-repository: https://github.com/reesaam/flutter_getx_dependencies_binding_annotation
+version: 0.0.7
+homepage: https://www.resam.site
+repository: https://github.com/reesaam/flutter_getx_dependencies_binding_annotation.git
 funding:
   - https://resam.site
 

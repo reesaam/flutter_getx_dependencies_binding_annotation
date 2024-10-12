@@ -22,7 +22,19 @@ class GetPut {
   final AnnotationTypes? type;
 
   const GetPut.page({this.as, this.route, this.isInitial, this.isUnknown}) : type = AnnotationTypes.page;
-  const GetPut.controller({this.as}) : type = AnnotationTypes.controller, route = null, isInitial = null, isUnknown = null;
-  const GetPut.component({this.as}) : type = AnnotationTypes.component, route = null, isInitial = null, isUnknown = null;
-  const GetPut.repository({this.as}) : type = AnnotationTypes.repository, route = null, isInitial = null, isUnknown = null;
+  const GetPut.controller({this.as})
+      : type = AnnotationTypes.controller,
+        route = null,
+        isInitial = null,
+        isUnknown = null;
+  const GetPut.component({this.as})
+      : type = AnnotationTypes.component,
+        route = null,
+        isInitial = null,
+        isUnknown = null;
+  const GetPut.repository({this.as})
+      : type = AnnotationTypes.repository,
+        route = null,
+        isInitial = null,
+        isUnknown = null;
 }
