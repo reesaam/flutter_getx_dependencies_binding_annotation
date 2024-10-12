@@ -36,10 +36,10 @@ class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
     );
 
     // Logging details about founded Annotation
-    log.info(title: 'Annotation Found in', data: dataModel.source);
-    log.info(title: 'Annotation Name', data: dataModel.name, as: dataModel.as);
-    log.info(title: 'Annotation Type', data: dataModel.type);
-    log.space();
+    GeneratorLog.info(title: 'Annotation Found in', data: dataModel.source);
+    GeneratorLog.info(title: 'Annotation Name', data: dataModel.name, as: dataModel.as);
+    GeneratorLog.info(title: 'Annotation Type', data: dataModel.type);
+    GeneratorLog.space();
 
     // Adding the Element in the main Generator
     CodeGenerator().addElement(dataModel);

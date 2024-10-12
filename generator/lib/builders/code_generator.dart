@@ -1,5 +1,3 @@
-/// Do not Import Get Library => package:get/get.dart';
-
 import 'dart:async';
 import 'package:build/src/builder/build_step.dart';
 import 'package:source_gen/source_gen.dart';
@@ -61,7 +59,7 @@ class CodeGenerator extends Generator {
     /// it will be restricted this way to generate specific file and save resources
     bool canGenerate = library.element.source.uri.path.contains(ImportDependencies.main.url);
     if(canGenerate) {
-      log(title: 'Code Generation Started...');
+      GeneratorLog(title: 'Code Generation Started...');
 
       /// Imports
       importsCodeBody = importsCodeBody.addImport(ImportDependencies.get.url);
@@ -82,7 +80,7 @@ class CodeGenerator extends Generator {
       String pages = Strings.empty;
       for (var page in pagesList) {
         pages = pages.addLine('${_pageDependencyFormat(page)},');
-        log.info(title: 'Page Added to Pages', data: page.name, as: page.as);
+        GeneratorLog.info(title: 'Page Added to Pages', data: page.name, as: page.as);
       }
 
       initialPageString = 'static GetPage get initialRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.initialRoute == true))};';
@@ -92,19 +90,19 @@ class CodeGenerator extends Generator {
       //Controllers
       for(var controller in controllersList) {
         controllersCodeBody = controllersCodeBody.addLine(_controllerDependencyFormat(controller));
-        log.info(title: 'Controller Added to Pages', data: controller.name, as: controller.as);
+        GeneratorLog.info(title: 'Controller Added to Pages', data: controller.name, as: controller.as);
       }
 
       //Components
       for(var component in componentsList) {
         componentsCodeBody = componentsCodeBody.addLine(_controllerDependencyFormat(component));
-        log.info(title: 'Component Added to Pages', data: component.name, as: component.as);
+        GeneratorLog.info(title: 'Component Added to Pages', data: component.name, as: component.as);
       }
 
       //Repositories
       for(var repository in repositoriesList) {
         repositoriesCodeBody = repositoriesCodeBody.addLine(_controllerDependencyFormat(repository));
-        log.info(title: 'Repository Added to Pages', data: repository.name, as: repository.as);
+        GeneratorLog.info(title: 'Repository Added to Pages', data: repository.name, as: repository.as);
       }
 
       dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.controller.name.capitalizeFirst, body: controllersCodeBody);
@@ -125,7 +123,7 @@ class CodeGenerator extends Generator {
       mainCodeBody = mainCodeBody.addBindingClass(body: bindingsCodeBody).addSpace();
       mainCodeBody = mainCodeBody.addLine(dependenciesCodeBody).addSpace();
 
-      log(title: 'Code Generation Finished...');
+      GeneratorLog(title: 'Code Generation Finished...');
     }
 
     bool canPublish = mainCodeBody.isNotEmpty && canGenerate;

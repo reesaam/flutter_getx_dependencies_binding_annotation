@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="getx_binding_annotation API docs, for the Dart programming language.">
+  <title>getx_binding_annotation - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://www.resam.site">getx_binding_annotation package</a></li>
+  </ol>
+  <div class="self-name">getx_binding_annotation</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button" title="Toggle brightness">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        dark_mode
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        light_mode
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <p align="center">
+  Getx Dependencies Binding Annotation Generator
+</p>
+<p align="center">
+  <!-- Pub Version -->
+  <a href="https://pub.dev/packages/getx_binding_annotation"><img src="https://img.shields.io/pub/v/getx_binding_annotation?logo=dart" alt="PubVersion"></a>
+  <!-- Pub Points} -->
+  <a href="https://pub.dev/packages/getx_binding_annotation"><img src="https://img.shields.io/pub/points/getx_binding_annotation?logo=dart" alt="PubPoints"></a>
+  <!-- GitHub Repo -->
+  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/repo-Getx_Binding_Annotation-yellowgreen?logo=github" alt="build"></a>
+  <!-- GitHub Stars -->
+  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/github/stars/felangel/bloc.svg?style=flat&amp;logo=github&amp;colorB=deeppink&amp;label=stars" alt="Star on Github"></a>
+  <!-- DartDoc -->
+  <a href="https://pub.dev/documentation/getx_binding_annotation/latest"><img src="https://img.shields.io/badge/dartdocs-latest-blue.svg" alt="Latest Dartdocs"></a>
+</p>
+<p align="center">
+  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/Android-black?logo=android" alt="android"></a>
+  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/iOS-black?logo=apple" alt="ios"></a>
+  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/Web-black" alt="ios"></a>
+  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/Linux-black?logo=linux" alt="linux"></a>
+  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/Windows-black" alt="windows"></a>
+  <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/MacOS-black?logo=apple" alt="mac-os"></a>
+</p>
+<p>A Code Generator Plugin to Generate Pages and Dependencies for GetX State Manager base on Annotation.
+This package designed to prevent adding dependencies one by one into the lists of the GetX. You can use it for pages or controllers or any other dependencies.</p>
+<h3 id="contents">Contents:</h3>
+<ul>
+<li><a href="#Getting-Started">Getting Started</a></li>
+<li><a href="#Usage">Usage</a></li>
+<li><a href="#Options">Options</a>
+<ul>
+<li><a href="#Some-Examples">Some Examples</a></li>
+</ul>
+</li>
+<li><a href="#Docs">Docs</a></li>
+<li><a href="#About-Author">About Author</a></li>
+<li><a href="#Packages-and-Dependencies">Packages and Dependencies</a></li>
+<li><a href="#Testing">Testing</a></li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<p>Add dependencies in the <code>pubspec.yaml</code>:</p>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  get: ^latest
+  getx_binding_annotation: ^latest
+
+dev_dependencies:
+  build_runner: ^latest
+  getx_binding_annotation_generator: ^latest
+</code></pre>
+<p>Get the Changes by:</p>
+<pre class="language-shell"><code class="language-shell">flutter pub get
+</code></pre>
+<p>or</p>
+<pre class="language-shell"><code class="language-shell">dart pub get
+</code></pre>
+<h2 id="usage">Usage</h2>
+<pre class="language-dart"><code class="language-dart">import 'package:getx_binding_annotation/annotation.dart';
+</code></pre>
+<p>Add desired <code>@Annotation</code> on top of the desired class and set the desired Options.</p>
+<p>Such as:</p>
+<p><code>HomePage</code></p>
+<pre class="language-dart"><code class="language-dart">@GetPut.page(isInitial: true)
+class HomePage extends GetView&lt;HomePageController&gt; {}
+</code></pre>
+<pre class="language-dart"><code class="language-dart">@GetPut.controller()
+class SettingsController extends GetxController {}
+</code></pre>
+<p>then you should run the <code>build_runner</code> to generate the codes and creating related file and include all the pages, controllers, components and repositories in one place and prepared to use.
+You can use</p>
+<pre class="language-shell"><code class="language-shell">dart pub run build_runner build --delete-conflicting-outputs
+</code></pre>
+<p>After a successful generation then you would have the new <code>main.get_put.dart</code> file in the project root folder <code>/lib</code> beside <code>main.dart</code>
+then you can use the plugin to put variables in suitable places and use them.</p>
+<pre class="language-dart"><code class="language-dart">import 'main.get_put.dart';
+</code></pre>
+<ul>
+<li><code>GetPutBindings()</code> : for dependency injection</li>
+<li><code>GetPutPages.pages</code> : will set all pages into GetX</li>
+<li><code>GetPutPages.initialRoute.name</code> : will set the initial route</li>
+<li><code>GetPutPages.unknownRoute</code> : will set the unknown route for undetected routes in the app</li>
+</ul>
+<p>Make change in <code>main</code> at <code>'main.dart'</code>:</p>
+<pre class="language-dart"><code class="language-dart">void main() {
+  GetPutBindings().dependencies();
+  runApp(const MainApp());
+}
+
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      /// You must set these four functions and variables in your Project
+      initialBinding: GetPutBindings(), // Inject all dependencies
+      getPages: GetPutPages.pages, // Add all the pages in GetX context
+      initialRoute: GetPutPages.initialRoute.name, // Set initial route
+      unknownRoute: GetPutPages.unknownRoute, // Set a route for any unknown or undefined route in the app
+    );
+  }
+}
+</code></pre>
+<h3 id="you-can-check-the-example-for-a-more-complete-example-more-details-and-further-information">You can check the <code>/example</code> for a more complete example, more details and further information.</h3>
+<h2 id="options">Options</h2>
+<p>You can set some annotations and its Options in the <code>@Annotation</code>
+Available Options:</p>
+<ul>
+<li><code>@GetPut.page()</code>
+<ul>
+<li><code>as</code>: Change the Name of the Page in the dependencies and use it as another name.</li>
+<li><code>route</code>: The plugin will generate a default name based on the page's name, but also, you can set a String for the route and the new route will be used. If the <code>route</code> has not been set, the default generate route will use.</li>
+<li><code>isInitial</code>: You  should set a <code>initialRoute</code> for the GetX and the app will start by that page and it's route, so it is mandatory. and you can set your initial page by this flag. The plugin would not throw an exception if you set two or more initial pages, but it will set the first page in the generate pages list that marked as initial page as the default initial route.</li>
+<li><code>isUnknown</code>: You can set a unknown route for the GetX and the app will show the page by it's route, if there was a change page without valid route. You can set your unknown page by this flag. The plugin would not throw an exception if you set two or more unknown pages, but it will set the first page in the generate pages list that marked as unknown page as the default unknown route.</li>
+</ul>
+</li>
+<li><code>@GetPut.controller()</code>
+<ul>
+<li><code>as</code>: Change the Name of the Controller in the dependencies and use it as another name.</li>
+</ul>
+</li>
+<li><code>@GetPut.component()</code>
+<ul>
+<li><code>as</code>: Change the Name of the Component in the dependencies and use it as another name.</li>
+</ul>
+</li>
+<li><code>@GetPut.repository()</code>
+<ul>
+<li><code>as</code>: Change the Name of Repository in the dependencies and use it as another name.</li>
+</ul>
+</li>
+</ul>
+<p>Some Examples:</p>
+<p><code>Settings:</code></p>
+<pre class="language-dart"><code class="language-dart">@GetPut.page()
+class SettingsPage extends GetView&lt;SettingsController&gt; {}
+</code></pre>
+<pre class="language-dart"><code class="language-dart">@GetPut.controller()
+class NotFoundController extends GetxController {}
+</code></pre>
+<p><code>NotFound:</code> or <code>Unknown:</code></p>
+<pre class="language-dart"><code class="language-dart">@GetPut.page(isUnknown: true)
+class NotFoundPage extends GetView&lt;NotFoundController&gt; {}
+</code></pre>
+<pre class="language-dart"><code class="language-dart">@GetPut.controller()
+class NotFoundController extends GetxController {}
+</code></pre>
+<p><code>Storage Component:</code></p>
+<pre class="language-dart"><code class="language-dart">abstract class StorageComponent {}
+
+@GetPut.component(as: 'StorageComponent')
+class StorageComponentImpl {}
+</code></pre>
+<p><code>Remote DataSource Repository:</code></p>
+<pre class="language-dart"><code class="language-dart">@GetPut.repository()
+class RemoteDataSourceRepository {}
+</code></pre>
+<h2 id="docs">Docs</h2>
+<p><a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation/tree/main/generator/doc/api"><img src="https://img.shields.io/badge/GitHub-Docs_Repository-important?logo=github" alt="build"></a></p>
+<h2 id="about-author">About Author</h2>
+<h3 id="resam-taghipour">Resam Taghipour</h3>
+<p><a href="https://www.resam.site"><img src="https://img.shields.io/badge/Website-resam.site-blue" alt="Pub"></a>
+<a href="https://github.com/reesaam"><img src="https://img.shields.io/badge/GitHub-reesaam-black?style=flat&amp;logo=github&amp;link=https%3A%2F%2Fgithub.com%2Freesaam" alt="account"></a>
+<a href="https://www.linkedin.com/in/resam"><img src="https://img.shields.io/badge/LinkedIn-resam-blue?logo=linkedin" alt="Pub"></a>
+<a href="emailto:resam@resam.site"><img src="https://img.shields.io/badge/Email-resam-important?logo=maildotru" alt="Pub"></a></p>
+<h2 id="packages-and-dependencies">Packages and Dependencies</h2>
+<p><a href="https://dart.dev"><img src="https://img.shields.io/badge/Dart-red?logo=dart" alt="Pub"></a>
+<a href="https://flutter.dev"><img src="https://img.shields.io/badge/Flutter-blue?logo=flutter" alt="Pub"></a>
+<a href="https://pub.dev/packages/get"><img src="https://img.shields.io/badge/pub-GetX-blue?logo=dart" alt="Pub"></a>
+<a href="https://pub.dev/packages/build_runner"><img src="https://img.shields.io/badge/pub-BuildRunner-red?logo=dart" alt="Pub"></a>
+<a href="https://pub.dev/packages/dartdoc"><img src="https://img.shields.io/badge/pub-DartDoc-red?logo=dart" alt="Pub"></a></p>
+<h2 id="license">License</h2>
+<p>This project is licensed under the '<strong>BSD-3-Clause</strong>' License - see the LICENSE for details.</p>
+<p><a href="https://pub.dev/packages/getx_binding_annotation/license"><img src="https://img.shields.io/badge/LICENSE-blue" alt="Pub"></a></p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="getx_binding_annotation">
+  <span class="name"><a href="getx_binding_annotation/getx_binding_annotation-library.html">annotation</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="https://www.resam.site">getx_binding_annotation package</a></li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">getx_binding_annotation</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="getx_binding_annotation/getx_binding_annotation-library.html">annotation</a></li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    getx_binding_annotation
+      0.0.6
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

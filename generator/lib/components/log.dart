@@ -5,7 +5,7 @@ import '../resources/enums.dart';
 /// I can use it when I am developing
 /// and You can use it to know whats happening and may help you to debug and also know what is happening in your app
 
-class log {
+class GeneratorLog {
 
   // Colors
   final _logColorsNormal = ['\x1B[32m', '\x1B[0m'];
@@ -19,21 +19,21 @@ class log {
   final dynamic data;
 
   // Different Constructors with different log types
-  log({this.title, this.data}) : as = null {
+  GeneratorLog({this.title, this.data}) : as = null {
     print('${_logColorsNormal[0]}[$elementsMainName] $title $_data ${_logColorsNormal[1]}');
   }
 
-  log.info({this.title, this.data, this.as}) {
+  GeneratorLog.info({this.title, this.data, this.as}) {
     print('${_logColorsInfo[0]}[$elementsMainName] [${LogType.info.typeName}] $title $_data $_as ${_logColorsInfo[1]}');
   }
-  log.warning({this.title, this.data, this.as}) {
+  GeneratorLog.warning({this.title, this.data, this.as}) {
     print('${_logColorsWarning[0]}[$elementsMainName] [${LogType.warning.typeName}] $title $_data $_as ${_logColorsWarning[1]}');
   }
-  log.error({this.title, this.data}) : as = null  {
+  GeneratorLog.error({this.title, this.data}) : as = null  {
     print('${_logColorsError[0]}[$elementsMainName] [${LogType.error.typeName}] $title $_data ${_logColorsError[1]}');
   }
   //Just add Space in the Terminal
-  log.space() : title = null, data = null, as = null  {
+  GeneratorLog.space() : title = null, data = null, as = null  {
     print('\n');
   }
 
