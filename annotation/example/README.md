@@ -49,6 +49,10 @@ dev_dependencies:
   build_runner: ^latest
   getx_dependencies_binding_annotation_generator: ^latest
 ```
+Getx Binding Annotation Generator:
+
+<a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation_generator"><img src="https://img.shields.io/badge/pub-Getx_Binding_Annotation_Generator-yellowgreen?logo=pub" alt="build"></a>
+
 
 Get the Changes by:
 ```shell
