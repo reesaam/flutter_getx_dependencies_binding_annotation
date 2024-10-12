@@ -1,11 +1,12 @@
-import 'package:getx_binding_annotation/getx_binding_annotation.dart';
+
+import 'package:getx_binding_annotation/annotation.dart';
 
 abstract class StorageComponent {
   loadDataFromStorage();
   saveDataOnStorage();
 }
 
-@GetPut.component(as: 'StorageComponent')
+@GetPut.component()
 class StorageComponentImpl implements StorageComponent {
 
   @override

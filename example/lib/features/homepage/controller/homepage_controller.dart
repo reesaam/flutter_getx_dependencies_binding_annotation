@@ -1,4 +1,4 @@
-import 'package:getx_binding_annotation/getx_binding_annotation.dart';
+import 'package:getx_binding_annotation/annotation.dart';
 
 import '../../../core/core_controller.dart';
 

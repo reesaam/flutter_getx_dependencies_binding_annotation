@@ -11,7 +11,7 @@ enum ImportDependencies {
   get(url: 'package:get/get.dart'),
   material(url: 'package:flutter/material.dart'),
   dartAsync(url: 'dart:async'),
-  getDependenciesBindingAnnotation(url: 'package:getx_binding_annotation/getx_binding_annotation.dart');
+  getDependenciesBindingAnnotation(url: 'package:getx_binding_annotation/annotation.dart');
 
   final String url;
   const ImportDependencies({required this.url});
