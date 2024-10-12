@@ -26,5 +26,5 @@
   - Major BugFix
   - Changes in ReadMe
 
-# 0.0.7
-  - Update
+# 0.1.0
+  - Major Update on Previous Major Fix
