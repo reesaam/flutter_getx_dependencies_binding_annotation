@@ -21,3 +21,7 @@
 
 # 0.0.5
   - Bugfix
+
+# 0.0.6
+  - Major BugFix
+  - Changes in ReadMe

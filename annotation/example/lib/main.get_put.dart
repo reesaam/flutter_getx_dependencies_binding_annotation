@@ -36,12 +36,12 @@ library;
 
 import 'package:get/get.dart';
 import 'components/storage_component.dart';
-import 'features/homepage/data/remote_data_source_repository.dart';
 import 'features/homepage/data/local_data_source_repository.dart';
+import 'features/homepage/data/remote_data_source_repository.dart';
 import 'features/homepage/controller/homepage_controller.dart';
-import 'features/not_found/view/not_found_view.dart';
 import 'features/homepage/view/homepage_view.dart';
 import 'features/not_found/controller/not_found_controller.dart';
+import 'features/not_found/view/not_found_view.dart';
 
 /// Generated Library Statistics:
 ///   Imports Count: 7
@@ -52,8 +52,8 @@ import 'features/not_found/controller/not_found_controller.dart';
 
 class GetPutPages {
   static List<GetPage> get pages => [
-        GetPage(name: '/NotFoundPage', page: NotFoundPage.new),
         GetPage(name: '/HomePage', page: HomePage.new),
+        GetPage(name: '/NotFoundPage', page: NotFoundPage.new),
       ];
   static GetPage get initialRoute =>
       GetPage(name: '/HomePage', page: HomePage.new);
@@ -89,11 +89,11 @@ class _GetPutComponent extends Bindings {
 class _GetPutRepository extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<RemoteDataSourceRepository>(
-        () => RemoteDataSourceRepositoryImpl(),
-        fenix: true);
     Get.lazyPut<LocalDataSourceRepository>(
         () => LocalDataSourceRepositoryImpl(),
+        fenix: true);
+    Get.lazyPut<RemoteDataSourceRepository>(
+        () => RemoteDataSourceRepositoryImpl(),
         fenix: true);
   }
 }
