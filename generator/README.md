@@ -4,9 +4,9 @@
 </p>
 <p align="center">
   <!-- Pub Version -->
-  <a href="https://pub.dev/packages/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/pub/v/getx_binding_annotation?logo=dart" alt="PubVersion"></a>
+  <a href="https://pub.dev/packages/getx_binding_annotation_generator"><img src="https://img.shields.io/pub/v/getx_binding_annotation?logo=dart" alt="PubVersion"></a>
   <!-- Pub Points} -->
-  <a href="https://pub.dev/packages/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/pub/points/getx_binding_annotation?logo=dart" alt="PubPoints"></a>
+  <a href="https://pub.dev/packages/getx_binding_annotation_generator"><img src="https://img.shields.io/pub/points/getx_binding_annotation?logo=dart" alt="PubPoints"></a>
   <!-- GitHub Repo -->
   <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/repo-Getx_Binding_Annotation-yellowgreen?logo=github" alt="build"></a>
   <!-- GitHub Stars -->
@@ -28,7 +28,7 @@ A Code Generator Plugin to Generate Pages and Dependencies for GetX State Manage
 This package designed to prevent adding dependencies one by one into the lists of the GetX. You can use it for pages or controllers or any other dependencies.
 This is the Generator for Getx Dependencies Binding Annotation Generator.
 
-<a href="https://pub.dev/packages/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/pub-Getx_Binding_Annotation-yellowgreen?logo=pub" alt="build"></a>
+<a href="https://pub.dev/packages/getx_binding_annotation_generator"><img src="https://img.shields.io/badge/pub-Getx_Binding_Annotation-yellowgreen?logo=pub" alt="build"></a>
 
 ### You can check the `/example` for a more complete example, more details and further information.
 

@@ -4,15 +4,15 @@
 </p>
 <p align="center">
   <!-- Pub Version -->
-  <a href="https://pub.dev/packages/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/pub/v/getx_binding_annotation?logo=dart" alt="PubVersion"></a>
+  <a href="https://pub.dev/packages/getx_binding_annotation"><img src="https://img.shields.io/pub/v/getx_binding_annotation?logo=dart" alt="PubVersion"></a>
   <!-- Pub Points} -->
-  <a href="https://pub.dev/packages/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/pub/points/getx_binding_annotation?logo=dart" alt="PubPoints"></a>
+  <a href="https://pub.dev/packages/getx_binding_annotation"><img src="https://img.shields.io/pub/points/getx_binding_annotation?logo=dart" alt="PubPoints"></a>
   <!-- GitHub Repo -->
   <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/repo-Getx_Binding_Annotation-yellowgreen?logo=github" alt="build"></a>
   <!-- GitHub Stars -->
   <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/github/stars/felangel/bloc.svg?style=flat&logo=github&colorB=deeppink&label=stars" alt="Star on Github"></a>
   <!-- DartDoc -->
-  <a href="https://pub.dev/documentation/flutter_getx_dependencies_binding_annotation/latest"><img src="https://img.shields.io/badge/dartdocs-latest-blue.svg" alt="Latest Dartdocs"></a>
+  <a href="https://pub.dev/documentation/getx_binding_annotation/latest"><img src="https://img.shields.io/badge/dartdocs-latest-blue.svg" alt="Latest Dartdocs"></a>
 </p>
 <p align="center">
   <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation"><img src="https://img.shields.io/badge/Android-black?logo=android" alt="android"></a>
