@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:build/src/builder/build_step.dart';
-import 'package:dart_style/dart_style.dart';
 import 'package:source_gen/source_gen.dart';
 import '../components/descriptions_generator.dart';
 import '../components/log.dart';

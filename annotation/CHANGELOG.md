@@ -28,3 +28,8 @@
 
 # 0.1.0
   - Major Update on Previous Major Fix
+
+# 0.1.1
+  - Add Type fo 'as'
+  - Some BugFix
+  - ReadMe Update
