@@ -33,3 +33,13 @@
   - Add Type fo 'as'
   - Some BugFix
   - ReadMe Update
+
+# 0.1.2
+- Versioning Resolve
+- Points Changes
+
+# 0.1.3
+- Versioning Resolve
+
+# 0.2.1
+- Versioning Resolve

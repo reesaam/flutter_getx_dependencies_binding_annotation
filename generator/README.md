@@ -42,8 +42,7 @@ This is the Generator for Getx Dependencies Binding Annotation Generator.
 <a href="https://github.com/reesaam"><img src="https://img.shields.io/badge/GitHub-reesaam-black?style=flat&logo=github&link=https%3A%2F%2Fgithub.com%2Freesaam" alt="account"></a>
 <a href="https://www.linkedin.com/in/resam"><img src="https://img.shields.io/badge/LinkedIn-resam-blue?logo=linkedin" alt="Pub"></a>
 <a href="emailto:resam.t@gmail.com"><img src="https://img.shields.io/badge/Gmail-resam.t-red?logo=gmail" alt="Pub"></a>
-<a href="emailto:resam@resam.site"><img src="https://img.shields.io/badge/Email-resam-important?logo=maildotru" alt="Pub"></a>
-
+<a><img src="https://img.shields.io/badge/Email-resam@resam.site-important?logo=maildotru" alt="Pub"></a>
 
 ## Packages and Dependencies
 <a href="https://dart.dev"><img src="https://img.shields.io/badge/Dart-red?logo=dart" alt="Pub"></a>

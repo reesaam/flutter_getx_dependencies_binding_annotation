@@ -21,17 +21,28 @@ class GetPut {
   final bool? isUnknown;
   final AnnotationTypes? type;
 
+  //GetX Pages
+  //Pages will decorated with this Annotation to be distinct
   const GetPut.page({this.as, this.route, this.isInitial, this.isUnknown}) : type = AnnotationTypes.page;
+
+  //GetX Controllers
+  //Controllers will decorated with this Annotation to be distinct
   const GetPut.controller({this.as})
       : type = AnnotationTypes.controller,
         route = null,
         isInitial = null,
         isUnknown = null;
+
+  //GetX Components
+  //Components will decorated with this Annotation to be distinct
   const GetPut.component({this.as})
       : type = AnnotationTypes.component,
         route = null,
         isInitial = null,
         isUnknown = null;
+
+  //GetX Repositories
+  //Repositories will decorated with this Annotation to be distinct
   const GetPut.repository({this.as})
       : type = AnnotationTypes.repository,
         route = null,

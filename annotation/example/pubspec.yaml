@@ -1,11 +1,11 @@
 name: example_for_getx_binding_annotation
 description: A project used to demo the GetxDependenciesBindingAnnotation
-version: 0.1.1
+version: 0.2.1
 homepage: https://www.linkedin.com/in/resam/
 repository: https://github.com/reesaam/flutter_getx_dependencies_binding_annotation
 
 environment:
-  sdk: ^3.5.3
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -15,8 +15,8 @@ dependencies:
     path: ../../annotation/
 
 dev_dependencies:
-  build_runner: ^2.4.13
-  dartdoc: ^8.0.8
+  build_runner: ^2.4.10
+  dartdoc: ^6.2.2
   lints: ^4.0.0
   test: ^1.24.0
   getx_binding_annotation_generator:
