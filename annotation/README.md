@@ -62,7 +62,7 @@ dart pub get
 ## Usage
 
 ```dart
-import 'package:getx_binding_annotation/annotation.dart';
+import 'package:getx_binding_annotation/get_put_annotation.dart';
 ```
 
 Add desired `@Annotation` on top of the desired class and set the desired Options.
@@ -73,6 +73,13 @@ Such as:
 ```dart
 @GetPut.page(isInitial: true)
 class HomePage extends GetView<HomePageController> {}
+```
+
+`Unknown or Not Found Page`
+* Unknown Page must be defined
+```dart
+@GetPut.page(isUnknown: true)
+class UnknownPage extends GetView<HomePageController> {}
 ```
 ```dart
 @GetPut.controller()
@@ -161,7 +168,7 @@ class NotFoundController extends GetxController {}
 ```dart
 abstract class StorageComponent {}
 
-@GetPut.component(as: 'StorageComponent')
+@GetPut.component(as: StorageComponent)
 class StorageComponentImpl {}
 ```
 `Remote DataSource Repository:`

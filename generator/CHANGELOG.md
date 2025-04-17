@@ -43,3 +43,12 @@
 
 # 0.2.1
 - Versioning Resolve
+- 
+# 0.2.2
+- Versions Update
+
+# 0.2.5
+- Rename Annotation Dart File for more clarity
+- Versions Collision Resolve and Update
+- Changes in ReadMe
+- Apply Analyzer Changes
