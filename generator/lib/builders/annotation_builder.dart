@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:analyzer/dart/element/element.dart';
-import 'package:build/src/builder/build_step.dart';
+import 'package:build/build.dart';
 import 'package:getx_binding_annotation/get_put_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -27,8 +27,8 @@ class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
     // Extracting Data from all Elements and filling the data into a model to use everywhere
     ExtractedInfoModel dataModel = ExtractedInfoModel(
       element: element,
-      source: element.source?.uri.path ?? Strings.unknown,
-      type: element.metadata.first.element?.name?.getAnnotationType ?? AnnotationTypes.unknown,
+      source: element.library?.uri.path ?? Strings.unknown,
+      type: element.metadata.annotations.first.element?.name?.getAnnotationType ?? AnnotationTypes.unknown,
       name: element.name ?? Strings.unknown,
       as: annotation.getAs,
       initialRoute: annotation.getIsInitial,

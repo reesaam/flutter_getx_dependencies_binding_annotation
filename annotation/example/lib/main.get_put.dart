@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format width=80
 
 // **************************************************************************
 // CodeGenerator
@@ -35,6 +36,7 @@ library;
 ///    GitHub: [ https://github.com/reesaam ]
 
 import 'package:get/get.dart';
+import 'main.dart';
 import 'main.dart';
 
 /// Generated Library Statistics:

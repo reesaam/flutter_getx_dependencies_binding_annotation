@@ -52,3 +52,8 @@
 - Versions Collision Resolve and Update
 - Changes in ReadMe
 - Apply Analyzer Changes
+
+# 0.2.6
+- Update Versions and libraries
+- Analyzer 8.+ Compatibility
+- Dart 3.5+ Compatibility
