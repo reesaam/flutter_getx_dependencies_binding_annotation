@@ -57,3 +57,7 @@
 - Update Versions and libraries
 - Analyzer 8.+ Compatibility
 - Dart 3.5+ Compatibility
+
+# 0.2.8
+- Update Versions and libraries
+- Normalize and Downgrade some Packages to have more Compatibility
