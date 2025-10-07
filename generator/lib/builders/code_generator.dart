@@ -82,10 +82,14 @@ class CodeGenerator extends Generator {
         // GeneratorLog.info(title: 'Page Added ', data: page.name, as: page.as);
       }
 
-      initialPageString = 'static GetPage get initialRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.initialRoute == true))};';
-      unknownPageString = 'static GetPage get unknownRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.unknownRoute == true))};';
+      initialPageString =
+          'static GetPage get initialRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.initialRoute == true))};';
+      unknownPageString =
+          'static GetPage get unknownRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.unknownRoute == true))};';
       pagesCodeBody = pagesCodeBody.addClass(
-          className: '${AnnotationTypes.page.name.capitalizeFirst}s', body: 'static List<GetPage> get ${AnnotationTypes.page.name}s => [${pages}\n]; $initialPageString $unknownPageString');
+          className: '${AnnotationTypes.page.name.capitalizeFirst}s',
+          body:
+              'static List<GetPage> get ${AnnotationTypes.page.name}s => [${pages}\n]; $initialPageString $unknownPageString');
 
       //Controllers
       for (var controller in controllersList) {
@@ -105,13 +109,19 @@ class CodeGenerator extends Generator {
         // GeneratorLog.info(title: 'Repository Added ', data: repository.name, as: repository.as);
       }
 
-      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.controller.name.capitalizeFirst, body: controllersCodeBody);
-      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.component.name.capitalizeFirst, body: componentsCodeBody);
-      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.repository.name.capitalizeFirst, body: repositoriesCodeBody);
+      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(
+          className: AnnotationTypes.controller.name.capitalizeFirst, body: controllersCodeBody);
+      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(
+          className: AnnotationTypes.component.name.capitalizeFirst, body: componentsCodeBody);
+      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(
+          className: AnnotationTypes.repository.name.capitalizeFirst, body: repositoriesCodeBody);
 
-      bindingsCodeBody = bindingsCodeBody.addLine('_$elementsMainName${AnnotationTypes.controller.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
-      bindingsCodeBody = bindingsCodeBody.addLine('_$elementsMainName${AnnotationTypes.component.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
-      bindingsCodeBody = bindingsCodeBody.addLine('_$elementsMainName${AnnotationTypes.repository.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
+      bindingsCodeBody = bindingsCodeBody.addLine(
+          '_$elementsMainName${AnnotationTypes.controller.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
+      bindingsCodeBody = bindingsCodeBody.addLine(
+          '_$elementsMainName${AnnotationTypes.component.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
+      bindingsCodeBody = bindingsCodeBody.addLine(
+          '_$elementsMainName${AnnotationTypes.repository.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
 
       /// CodeBody Generation
       mainCodeBody = mainCodeBody.addLine('library;').addSpace();
@@ -122,7 +132,9 @@ class CodeGenerator extends Generator {
       mainCodeBody = mainCodeBody.addBindingClass(body: bindingsCodeBody).addSpace();
       mainCodeBody = mainCodeBody.addLine(dependenciesCodeBody).addSpace();
 
-      GeneratorLog(title: '${pagesList.length} Pages, ${controllersList.length} Controllers, ${componentsList.length} Components, and ${repositoriesList.length} Repositories Founded and Added...');
+      GeneratorLog(
+          title:
+              '${pagesList.length} Pages, ${controllersList.length} Controllers, ${componentsList.length} Components, and ${repositoriesList.length} Repositories Founded and Added...');
       GeneratorLog(title: 'Code Generation Finished...');
     }
 
@@ -154,6 +166,9 @@ class CodeGenerator extends Generator {
 
   /// These functions are helping generating the Strings and being unified
   /// these are mostly general concepts and may use several places, so we can change them here to have the change everywhere easily
-  String _pageDependencyFormat(ExtractedInfoModel element) => 'GetPage(name: \'/${element.as ?? element.name}\', page: ${element.name}.new)';
-  String _controllerDependencyFormat(ExtractedInfoModel element) => 'Get.lazyPut<${element.as ?? element.name}>(() => ${element.name}(), fenix: ${fenix});';
+  String _pageDependencyFormat(ExtractedInfoModel element) =>
+      'GetPage(name: \'/${element.as ?? element.name}\', page: ${element.name}.new)';
+  String _controllerDependencyFormat(ExtractedInfoModel element) => element.lazy
+      ? 'Get.lazyPut<${element.as ?? element.name}>(() => ${element.name}(), fenix: ${fenix});'
+      : 'Get.put<${element.as ?? element.name}>(${element.name}());';
 }

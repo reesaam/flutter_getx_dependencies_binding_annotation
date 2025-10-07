@@ -69,7 +69,7 @@ dart pub get
 import 'package:getx_dependencies_binding_annotation/annotation.dart';
 ```
 
-Add desired `@Annotation` on top of the desired class and set the desired Options.
+Add desired `@` Annotation on top of the desired class and set the desired Options.
 
 Such as:
 

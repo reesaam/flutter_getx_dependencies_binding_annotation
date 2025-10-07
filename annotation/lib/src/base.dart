@@ -20,14 +20,17 @@ class GetPut {
   final bool? isInitial;
   final bool? isUnknown;
   final AnnotationTypes? type;
+  final bool lazy;
 
   //GetX Pages
   //Pages will decorated with this Annotation to be distinct
-  const GetPut.page({this.as, this.route, this.isInitial, this.isUnknown}) : type = AnnotationTypes.page;
+  const GetPut.page({this.as, this.route, this.isInitial, this.isUnknown})
+      : type = AnnotationTypes.page,
+        lazy = true;
 
   //GetX Controllers
   //Controllers will decorated with this Annotation to be distinct
-  const GetPut.controller({this.as})
+  const GetPut.controller({this.as, this.lazy = true})
       : type = AnnotationTypes.controller,
         route = null,
         isInitial = null,
@@ -35,7 +38,7 @@ class GetPut {
 
   //GetX Components
   //Components will decorated with this Annotation to be distinct
-  const GetPut.component({this.as})
+  const GetPut.component({this.as, this.lazy = true})
       : type = AnnotationTypes.component,
         route = null,
         isInitial = null,
@@ -43,7 +46,7 @@ class GetPut {
 
   //GetX Repositories
   //Repositories will decorated with this Annotation to be distinct
-  const GetPut.repository({this.as})
+  const GetPut.repository({this.as, this.lazy = true})
       : type = AnnotationTypes.repository,
         route = null,
         isInitial = null,

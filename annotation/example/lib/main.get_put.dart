@@ -22,10 +22,10 @@ library;
 ///  You can see how to use the generated class in the main in the GetMaterialApp as [example]
 
 ///  Package:
-///    Package Last Version: [ 1.0.0 ]
+///    Package Last Version: [ 0.3.0 ]
 ///    Package Name: [ getx_binding_annotation_generator ]
-///    Package Description: [ Getx Dependencies Binding Annotation Generator ]
-///    Package Address: [ ** Will Add in Next Update after First Publish ** ]
+///    Package Description: [ Getx Pages and Dependencies Binding Annotation Generator ]
+///    Package Address: [ https://pub.dev/packages/getx_binding_annotation ]
 ///    Package GitHubRepositoryAddress: [ https://github.com/reesaam/flutter_getx_dependencies_binding_annotation ]
 
 ///  Written and Provided by:

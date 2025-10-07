@@ -10,6 +10,7 @@ class ExtractedInfoModel {
   final AnnotationTypes type;
   final bool? initialRoute;
   final bool? unknownRoute;
+  final bool lazy;
 
   ExtractedInfoModel({
     required this.name,
@@ -19,5 +20,6 @@ class ExtractedInfoModel {
     required this.type,
     this.initialRoute,
     this.unknownRoute,
+    this.lazy = true,
   });
 }

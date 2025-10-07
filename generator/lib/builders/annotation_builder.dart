@@ -33,16 +33,21 @@ class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
       as: annotation.getAs,
       initialRoute: annotation.getIsInitial,
       unknownRoute: annotation.getIsUnknownRoute,
+      lazy: annotation.getLazy,
     );
 
     // Logging details about founded Annotation
-    GeneratorLog.info(title: 'Annotation Found in', data: dataModel.source);
-    GeneratorLog.info(title: 'Annotation Name', data: dataModel.name, as: dataModel.as);
-    GeneratorLog.info(title: 'Annotation Type', data: dataModel.type);
+    GeneratorLog.info(title: '${dataModel.type} Annotation ${dataModel.name} ${dataModel.as == null ? '' : 'as ${dataModel.as}'} Found in', data: dataModel.source);
     GeneratorLog.space();
 
     // Adding the Element in the main Generator
-    CodeGenerator().addElement(dataModel);
+    final bool isAbstract = element.baseElement.toString().contains('abstract');
+    if (isAbstract) {
+      GeneratorLog.error(title: '${dataModel.name} can\'t be generated', data: 'abstract classes can\'t be generated');
+      throw Exception('On ${dataModel.name} error occurred, abstract classes can\'t be generated');
+    } else {
+      CodeGenerator().addElement(dataModel);
+    }
     return Strings.empty;
   }
 }
