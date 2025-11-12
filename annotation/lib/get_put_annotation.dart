@@ -1,3 +1,3 @@
-library getx_binding_annotation;
+library get_put_annotation;
 
 export 'src/base.dart';
