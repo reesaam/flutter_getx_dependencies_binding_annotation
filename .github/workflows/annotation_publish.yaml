@@ -43,7 +43,7 @@ jobs:
 
       - name: pubspec Version Check
         run: |
-          TAG_VERSION=${GITHUB_REF#refs/tags/v}
+          TAG_VERSION=${GITHUB_REF#refs/tags/av}
           FILE_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}')
           if [ "$TAG_VERSION" != "$FILE_VERSION" ]; then
             echo "❌ Tag version ($TAG_VERSION) does not match pubspec.yaml version ($FILE_VERSION)"
@@ -52,7 +52,7 @@ jobs:
 
       - name: ChangeLog Check
         run: |
-          VERSION_TAG=${GITHUB_REF#refs/tags/v}
+          VERSION_TAG=${GITHUB_REF#refs/tags/av}
           if grep -q "$VERSION_TAG" CHANGELOG.md; then
             echo "✅ CHANGELOG.md contains version $VERSION_TAG"
           else
