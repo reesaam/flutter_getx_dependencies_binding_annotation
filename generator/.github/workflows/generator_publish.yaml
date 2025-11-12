@@ -100,7 +100,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           VERSION_TAG=${GITHUB_REF#refs/tags/}
-          RELEASE_BRANCH="releases/$VERSION_TAG"
+          RELEASE_BRANCH="generator_releases/$VERSION_TAG"
 
           git checkout -b "$RELEASE_BRANCH"
           git push origin "$RELEASE_BRANCH"
@@ -108,7 +108,7 @@ jobs:
       - name: Merge Release Branch to Main Feasibility
         run: |
           VERSION_TAG=${GITHUB_REF#refs/tags/}
-          RELEASE_BRANCH="releases/$VERSION_TAG"
+          RELEASE_BRANCH="generator_releases/$VERSION_TAG"
 
           git fetch origin main
           git checkout main
@@ -124,7 +124,7 @@ jobs:
       - name: Create and Merge (squash) Pull Request to main
         run: |
           VERSION_TAG=${GITHUB_REF#refs/tags/}
-          RELEASE_BRANCH="releases/$VERSION_TAG"
+          RELEASE_BRANCH="generator_releases/$VERSION_TAG"
 
           sudo apt update
           sudo apt install gh -y
