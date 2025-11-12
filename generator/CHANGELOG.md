@@ -61,3 +61,7 @@
 # 0.2.8
 - Update Versions and libraries
 - Normalize and Downgrade some Packages to have more Compatibility
+
+# 0.3.0
+- Fix Some Bugs
+- Lazy Flag Added
