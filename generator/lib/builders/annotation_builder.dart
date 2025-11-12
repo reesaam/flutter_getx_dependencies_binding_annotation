@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:getx_binding_annotation/get_put_annotation.dart';
+import 'package:getx_binding_annotation/getx_binding_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 
 import '../extensions/annotation_type.dart';

@@ -62,7 +62,7 @@ dart pub get
 ## Usage
 
 ```dart
-import 'package:getx_binding_annotation/get_put_annotation.dart';
+import 'package:getx_binding_annotation/getx_binding_annotation.dart';
 ```
 
 Add desired `@Annotation` on top of the desired class and set the desired Options.

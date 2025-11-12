@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_binding_annotation/get_put_annotation.dart';
+import 'package:getx_binding_annotation/getx_binding_annotation.dart';
 
 /// ==> Import the Generated File
 import 'main.get_put.dart';
