@@ -1,9 +1,9 @@
-name: Flutter GetX Dependencies Binding Generator Package Release
+name: Flutter GetX Dependencies Binding Annotation Package Release
 
 on:
   push:
     tags:
-      - 'gv*.*.*'
+      - 'av*.*.*'
 
 permissions:
   contents: write
@@ -16,7 +16,13 @@ jobs:
       pull-requests: write
 
     runs-on: ubuntu-latest
-    environment: PUB_DEV
+
+    defaults:
+      run:
+        working-directory: annotation
+
+    script:
+      - cd annotation
 
     steps:
       - name: Checkout code
@@ -100,7 +106,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           VERSION_TAG=${GITHUB_REF#refs/tags/}
-          RELEASE_BRANCH="generator_releases/$VERSION_TAG"
+          RELEASE_BRANCH="annotation_releases/$VERSION_TAG"
 
           git checkout -b "$RELEASE_BRANCH"
           git push origin "$RELEASE_BRANCH"
@@ -108,7 +114,7 @@ jobs:
       - name: Merge Release Branch to Main Feasibility
         run: |
           VERSION_TAG=${GITHUB_REF#refs/tags/}
-          RELEASE_BRANCH="generator_releases/$VERSION_TAG"
+          RELEASE_BRANCH="annotation_releases/$VERSION_TAG"
 
           git fetch origin main
           git checkout main
@@ -124,11 +130,11 @@ jobs:
       - name: Create and Merge (squash) Pull Request to main
         run: |
           VERSION_TAG=${GITHUB_REF#refs/tags/}
-          RELEASE_BRANCH="generator_releases/$VERSION_TAG"
+          RELEASE_BRANCH="annotation_releases/$VERSION_TAG"
 
           sudo apt update
           sudo apt install gh -y
-          echo "${{ secrets.PUB_DEV }}" | gh auth login --with-token
+          echo "${{ secrets.ACCESS_TOKEN }}" | gh auth login --with-token
 
           gh pr create \
             --base main \

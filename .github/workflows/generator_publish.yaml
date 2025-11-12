@@ -16,10 +16,10 @@ jobs:
       pull-requests: write
 
     runs-on: ubuntu-latest
-    environment: PUB_DEV
 
-    script:
-      - cd annotation
+    defaults:
+      run:
+        working-directory: generator
 
     steps:
       - name: Checkout code
@@ -131,7 +131,7 @@ jobs:
 
           sudo apt update
           sudo apt install gh -y
-          echo "${{ secrets.PUB_DEV }}" | gh auth login --with-token
+          echo "${{ secrets.ACCESS_TOKEN }}" | gh auth login --with-token
 
           gh pr create \
             --base main \
