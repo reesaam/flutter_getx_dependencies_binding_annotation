@@ -80,6 +80,9 @@ jobs:
         run: |
           echo "Access token length: ${#ACCESS_TOKEN}"
           echo "Refresh token length: ${#REFRESH_TOKEN}"
+          echo "Access token length: ${{ secrets.ACCESS_TOKEN }}"
+          echo "Refresh token length: ${{ secrets.REFRESH_TOKEN }}"
+          echo "Credential length: ${{ secrets.CREDENTIALS }}"
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}

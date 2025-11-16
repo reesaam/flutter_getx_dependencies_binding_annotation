@@ -80,16 +80,21 @@ jobs:
         run: |
           echo "Access token length: ${#ACCESS_TOKEN}"
           echo "Refresh token length: ${#REFRESH_TOKEN}"
+          echo "Credential length: ${#CREDENTIALS}"
+          echo "Access token length: ${{ secrets.ACCESS_TOKEN }}"
+          echo "Refresh token length: ${{ secrets.REFRESH_TOKEN }}"
+          echo "Credential length: ${{ secrets.CREDENTIALS }}"
         env:
+          CREDENTIAL_JSON: ${{ secrets.CREDENTIALS }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
 
       - name: Package Publish
         uses: k-paxian/dart-package-publisher@v1.5.1
         with:
-#          credentialJson: ${{ secrets.PUB_DEV }}
-          accessToken: ${{ secrets.ACCESS_TOKEN }}
-          refreshToken: ${{ secrets.REFRESH_TOKEN }}
+          credentialJson: ${{ secrets.CREDENTIALS }}
+          #accessToken: ${{ secrets.ACCESS_TOKEN }}
+          #refreshToken: ${{ secrets.REFRESH_TOKEN }}
           flutter: true
           skipTests: true
 #
