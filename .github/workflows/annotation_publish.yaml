@@ -10,7 +10,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  publish:
+  annotation_publish:
     permissions:
       contents: write
       pull-requests: write
@@ -92,6 +92,7 @@ jobs:
       - name: Package Publish
         uses: k-paxian/dart-package-publisher@v1.5.1
         with:
+          working-directory: ./annotation
           credentialJson: ${{ secrets.CREDENTIALS }}
           #accessToken: ${{ secrets.ACCESS_TOKEN }}
           #refreshToken: ${{ secrets.REFRESH_TOKEN }}
