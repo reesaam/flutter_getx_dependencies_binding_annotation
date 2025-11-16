@@ -19,7 +19,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: annotation
+        working-directory: ./annotation
 
     steps:
       - name: Checkout code
@@ -35,10 +35,6 @@ jobs:
         with:
           flutter-version: '3.32.8' #'stable'
 
-      - name: Set Directory
-        run: |
-          cd ./annotation
-          
       - name: Clean Build
         run: flutter clean
 
