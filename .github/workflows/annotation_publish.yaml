@@ -22,11 +22,6 @@ jobs:
         working-directory: annotation
 
     steps:
-      - name: Install dependencies
-        run: |
-          cd ./annotation
-
-
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -40,6 +35,10 @@ jobs:
         with:
           flutter-version: '3.32.8' #'stable'
 
+      - name: Set Directory
+        run: |
+          cd ./annotation
+          
       - name: Clean Build
         run: flutter clean
 
