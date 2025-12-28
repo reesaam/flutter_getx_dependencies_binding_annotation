@@ -94,7 +94,10 @@ jobs:
 #          accessToken: ${{ secrets.ACCESS_TOKEN }}
 #          refreshToken: ${{ secrets.REFRESH_TOKEN }}
           skipTests: true
-#
+      - run: |
+        working-directory: ./annotation
+
+      #
 #      - name: Publish package
 #        run: dart pub publish --force
 #        env:
