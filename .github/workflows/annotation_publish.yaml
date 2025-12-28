@@ -18,6 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: PUB_DEV
 
+    defaults:
+      run:
+        working-directory: ./annotation
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
