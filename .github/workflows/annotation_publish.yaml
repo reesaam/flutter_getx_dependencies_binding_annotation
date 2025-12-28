@@ -99,6 +99,8 @@ jobs:
 
       - name: Publish package
         run: dart pub publish --force
+        with:
+          credentialJson: ${{ secrets.CREDENTIALS }}
 
       - name: Release Branch Creation
         run: |
