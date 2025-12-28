@@ -97,8 +97,6 @@ jobs:
 
       - name: Publish package
         run: dart pub publish --force
-        with:
-          credentialJson: ${{ secrets.CREDENTIALS }}
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
