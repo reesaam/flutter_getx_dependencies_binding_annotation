@@ -87,11 +87,8 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
-      - name: Change Dir
-        run: cd ..
-        
       - name: Package Publish Env
-        uses: k-paxian/dart-package-publisher@v1.5.1
+        uses: annotation/k-paxian/dart-package-publisher@v1.5.1
         with:
           credentialJson: ${{ secrets.CREDENTIALS }}
 #          accessToken: ${{ secrets.ACCESS_TOKEN }}
