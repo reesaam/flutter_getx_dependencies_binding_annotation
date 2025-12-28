@@ -87,20 +87,16 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
-#      - name: Package Publish Env
-#        uses: k-paxian/dart-package-publisher@v1.5.1
-#        run:
-#        working-directory: ./annotation
-#        with:
-#          credentialJson: ${{ secrets.CREDENTIALS }}
-##          accessToken: ${{ secrets.ACCESS_TOKEN }}
-##          refreshToken: ${{ secrets.REFRESH_TOKEN }}
-#          skipTests: true
+      - name: Package Publish Env
+        uses: ./k-paxian/dart-package-publisher@v1.5.1
+        with:
+          credentialJson: ${{ secrets.CREDENTIALS }}
+#          accessToken: ${{ secrets.ACCESS_TOKEN }}
+#          refreshToken: ${{ secrets.REFRESH_TOKEN }}
+          skipTests: true
 
       - name: Publish package
         run: dart pub publish --force
-        with:
-          credentialJson: ${{ secrets.CREDENTIALS }}
 
       - name: Release Branch Creation
         run: |
