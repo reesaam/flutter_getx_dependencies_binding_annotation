@@ -89,11 +89,11 @@ jobs:
 
       - name: Package Publish Env
         uses: k-paxian/dart-package-publisher@v1.5.1
-        with:
-          credentialJson: ${{ secrets.CREDENTIALS }}
+#        with:
+#          credentialJson: ${{ secrets.CREDENTIALS }}
 #          accessToken: ${{ secrets.ACCESS_TOKEN }}
 #          refreshToken: ${{ secrets.REFRESH_TOKEN }}
-          skipTests: true
+#          skipTests: true
 
       - name: Publish package
         run: dart pub publish --force
