@@ -1,22 +1,25 @@
-name: Flutter GetX Dependencies Binding Generator Package Release
+name: Flutter GetX Dependencies Binding Annotation Package Release
 
 on:
   push:
     tags:
-      - 'gv*.*.*'
+      - 'av*.*.*'
 
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
-  publish:
+  annotation_publish:
     permissions:
       contents: write
       pull-requests: write
 
     runs-on: ubuntu-latest
-    environment: PUB_DEV
+
+    defaults:
+      run:
+        working-directory: ./annotation
 
     steps:
       - name: Checkout code
@@ -25,12 +28,12 @@ jobs:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
         with:
-          sdk: ${{ secrets.DART_VERSION }}
+          sdk: '3.8.1' # stable
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ secrets.FLUTTER_VERSION }}
+          flutter-version: '3.32.8' #'stable'
 
       - name: Clean Build
         run: flutter clean
@@ -40,7 +43,7 @@ jobs:
 
       - name: pubspec Version Check
         run: |
-          TAG_VERSION=${GITHUB_REF#refs/tags/gv}
+          TAG_VERSION=${GITHUB_REF#refs/tags/av}
           FILE_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}')
           if [ "$TAG_VERSION" != "$FILE_VERSION" ]; then
             echo "❌ Tag version ($TAG_VERSION) does not match pubspec.yaml version ($FILE_VERSION)"
@@ -49,7 +52,7 @@ jobs:
 
       - name: ChangeLog Check
         run: |
-          VERSION_TAG=${GITHUB_REF#refs/tags/gv}
+          VERSION_TAG=${GITHUB_REF#refs/tags/av}
           if grep -q "$VERSION_TAG" CHANGELOG.md; then
             echo "✅ CHANGELOG.md contains version $VERSION_TAG"
           else
@@ -77,18 +80,21 @@ jobs:
         run: |
           echo "Access token length: ${#ACCESS_TOKEN}"
           echo "Refresh token length: ${#REFRESH_TOKEN}"
-          echo "Refresh token length: ${#CREDENTIALS}"
+          echo "Credential length: ${#CREDENTIALS}"
+          echo "Access token length: ${{ secrets.ACCESS_TOKEN }}"
+          echo "Refresh token length: ${{ secrets.REFRESH_TOKEN }}"
+          echo "Credential length: ${{ secrets.CREDENTIALS }}"
         env:
+          CREDENTIAL_JSON: ${{ secrets.CREDENTIALS }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
-          CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
       - name: Package Publish
         uses: k-paxian/dart-package-publisher@v1.5.1
         with:
           credentialJson: ${{ secrets.CREDENTIALS }}
-#          accessToken: ${{ secrets.ACCESS_TOKEN }}
-#          refreshToken: ${{ secrets.REFRESH_TOKEN }}
+          #accessToken: ${{ secrets.ACCESS_TOKEN }}
+          #refreshToken: ${{ secrets.REFRESH_TOKEN }}
           flutter: true
           skipTests: true
 #
@@ -102,7 +108,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           VERSION_TAG=${GITHUB_REF#refs/tags/}
-          RELEASE_BRANCH="releases/$VERSION_TAG"
+          RELEASE_BRANCH="annotation_releases/$VERSION_TAG"
 
           git checkout -b "$RELEASE_BRANCH"
           git push origin "$RELEASE_BRANCH"
@@ -110,7 +116,7 @@ jobs:
       - name: Merge Release Branch to Main Feasibility
         run: |
           VERSION_TAG=${GITHUB_REF#refs/tags/}
-          RELEASE_BRANCH="releases/$VERSION_TAG"
+          RELEASE_BRANCH="annotation_releases/$VERSION_TAG"
 
           git fetch origin main
           git checkout main
@@ -126,11 +132,11 @@ jobs:
       - name: Create and Merge (squash) Pull Request to main
         run: |
           VERSION_TAG=${GITHUB_REF#refs/tags/}
-          RELEASE_BRANCH="releases/$VERSION_TAG"
+          RELEASE_BRANCH="annotation_releases/$VERSION_TAG"
 
           sudo apt update
           sudo apt install gh -y
-          echo "${{ secrets.ACCESS_TOKEN }} / ${{ secrets.REFRESH_TOKEN }}" | gh auth login --with-token
+          echo "${{ secrets.ACCESS_TOKEN }}" | gh auth login --with-token
 
           gh pr create \
             --base main \
