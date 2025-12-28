@@ -88,13 +88,14 @@ jobs:
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
       - name: Package Publish Env
-        uses: k-paxian/dart-package-publisher@v1.5.1/annotation
+        uses: k-paxian/annotation/dart-package-publisher@v1.5.1
         with:
           credentialJson: ${{ secrets.CREDENTIALS }}
 #          accessToken: ${{ secrets.ACCESS_TOKEN }}
 #          refreshToken: ${{ secrets.REFRESH_TOKEN }}
           flutter: true
           skipTests: true
+
 
 #      - name: Publish package
 #        run: dart pub publish --force
