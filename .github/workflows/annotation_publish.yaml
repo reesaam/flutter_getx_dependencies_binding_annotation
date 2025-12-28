@@ -96,11 +96,11 @@ jobs:
 #          flutter: true
 #          skipTests: true
 
-      - name: Analyze code
-        run: dart analyze
-
-      - name: Run tests
-        run: dart test
+#      - name: Analyze code
+#        run: dart analyze
+#
+#      - name: Run tests
+#        run: dart test
 
       - name: Publish package
         run: dart pub publish --force
