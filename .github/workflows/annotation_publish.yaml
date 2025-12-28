@@ -63,7 +63,7 @@ jobs:
 
 #      - name: Code Analyze
 #        run: dart analyze
-
+#
 #      - name: Tests Run
 #        run: dart test
 
@@ -87,20 +87,25 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
-      - name: Package Publish Env
-        uses: k-paxian/annotation/dart-package-publisher@v1.5.1
-        with:
-          credentialJson: ${{ secrets.CREDENTIALS }}
-#          accessToken: ${{ secrets.ACCESS_TOKEN }}
-#          refreshToken: ${{ secrets.REFRESH_TOKEN }}
-          flutter: true
-          skipTests: true
+#      - name: Package Publish Env
+#        uses: k-paxian/dart-package-publisher@v1.5.1
+#        with:
+#          credentialJson: ${{ secrets.CREDENTIALS }}
+##          accessToken: ${{ secrets.ACCESS_TOKEN }}
+##          refreshToken: ${{ secrets.REFRESH_TOKEN }}
+#          flutter: true
+#          skipTests: true
 
+      - name: Analyze code
+        run: dart analyze
 
-#      - name: Publish package
-#        run: dart pub publish --force
-#        env:
-#          CREDENTIALS: ${{ secrets.CREDENTIALS }}
+      - name: Run tests
+        run: dart test
+
+      - name: Publish package
+        run: dart pub publish --force
+        env:
+          CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
       - name: Release Branch Creation
         run: |
