@@ -36,14 +36,6 @@ jobs:
         with:
           flutter-version: '3.32.8'
 
-      - name: Setup Package Publish
-        uses: k-paxian/dart-package-publisher@v1.5.1
-        with:
-          credentialJson: ${{ secrets.CREDENTIALS }}
-          #          accessToken: ${{ secrets.ACCESS_TOKEN }}
-          #          refreshToken: ${{ secrets.REFRESH_TOKEN }}
-          skipTests: true
-
       - name: Clean Build
         run: flutter clean
 
@@ -105,6 +97,8 @@ jobs:
 
       - name: Publish package
         run: dart pub publish --force
+        env:
+          CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
       - name: Release Branch Creation
         run: |
