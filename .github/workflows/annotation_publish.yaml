@@ -26,15 +26,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Dart
+      - name: Setup Dart
         uses: dart-lang/setup-dart@v1
         with:
           sdk: '3.8.1'
 
-      - name: Set up Flutter
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.8'
+
+      - name: Setup Package Publish
+        uses: k-paxian/dart-package-publisher@v1.5.1
+        with:
+          credentialJson: ${{ secrets.CREDENTIALS }}
+          #          accessToken: ${{ secrets.ACCESS_TOKEN }}
+          #          refreshToken: ${{ secrets.REFRESH_TOKEN }}
+          skipTests: true
 
       - name: Clean Build
         run: flutter clean
@@ -87,13 +95,13 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
-      - name: Package Publish Env
-        uses: ./annotation/k-paxian/dart-package-publisher@v1.5.1
-        with:
-          credentialJson: ${{ secrets.CREDENTIALS }}
-#          accessToken: ${{ secrets.ACCESS_TOKEN }}
-#          refreshToken: ${{ secrets.REFRESH_TOKEN }}
-          skipTests: true
+#      - name: Package Publish Env
+#        uses: k-paxian/dart-package-publisher@v1.5.1
+#        with:
+#          credentialJson: ${{ secrets.CREDENTIALS }}
+##          accessToken: ${{ secrets.ACCESS_TOKEN }}
+##          refreshToken: ${{ secrets.REFRESH_TOKEN }}
+#          skipTests: true
 
       - name: Publish package
         run: dart pub publish --force
