@@ -81,7 +81,7 @@ jobs:
         run: |
           echo "Access token length: ${#ACCESS_TOKEN}"
           echo "Refresh token length: ${#REFRESH_TOKEN}"
-          echo "Refresh token length: ${#CREDENTIALS}"
+          echo "Credentials token length: ${#CREDENTIALS}"
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
@@ -93,7 +93,6 @@ jobs:
           credentialJson: ${{ secrets.CREDENTIALS }}
 #          accessToken: ${{ secrets.ACCESS_TOKEN }}
 #          refreshToken: ${{ secrets.REFRESH_TOKEN }}
-          flutter: true
           skipTests: true
 #
 #      - name: Publish package
