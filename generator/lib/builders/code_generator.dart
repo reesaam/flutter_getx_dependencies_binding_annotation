@@ -12,11 +12,11 @@ import '../resources/strings.dart';
 class CodeGenerator extends Generator {
   /// List Variables to keep the data and then we will use them when generating the code
   /// This way everything, especially generating the code do so much faster and more efficient
-  static Set<String> importsList = Set<String>();
-  static Set<ExtractedInfoModel> pagesList = Set<ExtractedInfoModel>();
-  static Set<ExtractedInfoModel> controllersList = Set<ExtractedInfoModel>();
-  static Set<ExtractedInfoModel> componentsList = Set<ExtractedInfoModel>();
-  static Set<ExtractedInfoModel> repositoriesList = Set<ExtractedInfoModel>();
+  static Set<String> importsList = Set<String>.new();
+  static Set<ExtractedInfoModel> pagesList = Set<ExtractedInfoModel>.new();
+  static Set<ExtractedInfoModel> controllersList = Set<ExtractedInfoModel>.new();
+  static Set<ExtractedInfoModel> componentsList = Set<ExtractedInfoModel>.new();
+  static Set<ExtractedInfoModel> repositoriesList = Set<ExtractedInfoModel>.new();
 
   @override
   FutureOr<String?> generate(LibraryReader library, BuildStep buildStep) async {
@@ -89,7 +89,7 @@ class CodeGenerator extends Generator {
       pagesCodeBody = pagesCodeBody.addClass(
           className: '${AnnotationTypes.page.name.capitalizeFirst}s',
           body:
-              'static List<GetPage> get ${AnnotationTypes.page.name}s => [${pages}\n]; $initialPageString $unknownPageString');
+              'static List<GetPage> get ${AnnotationTypes.page.name}s => [$pages\n]; $initialPageString $unknownPageString');
 
       //Controllers
       for (var controller in controllersList) {
@@ -169,6 +169,6 @@ class CodeGenerator extends Generator {
   String _pageDependencyFormat(ExtractedInfoModel element) =>
       'GetPage(name: \'/${element.as ?? element.name}\', page: ${element.name}.new)';
   String _controllerDependencyFormat(ExtractedInfoModel element) => element.lazy
-      ? 'Get.lazyPut<${element.as ?? element.name}>(() => ${element.name}(), fenix: ${fenix});'
+      ? 'Get.lazyPut<${element.as ?? element.name}>(() => ${element.name}(), fenix: $fenix);'
       : 'Get.put<${element.as ?? element.name}>(${element.name}());';
 }

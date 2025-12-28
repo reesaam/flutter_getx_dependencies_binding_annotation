@@ -15,9 +15,9 @@ dependencies:
   build: ^4.0.0
   source_gen: ^4.0.1
   dart_style: ^3.0.1
-#  getx_binding_annotation: ^0.3.0
-  getx_binding_annotation:
-    path: ../annotation/
+  getx_binding_annotation: ^0.3.0
+#  getx_binding_annotation:
+#    path: ../annotation/
 
 dev_dependencies:
   lints: ^4.0.0
