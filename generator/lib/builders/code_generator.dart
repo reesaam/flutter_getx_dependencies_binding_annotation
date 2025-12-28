@@ -12,11 +12,11 @@ import '../resources/strings.dart';
 class CodeGenerator extends Generator {
   /// List Variables to keep the data and then we will use them when generating the code
   /// This way everything, especially generating the code do so much faster and more efficient
-  static Set<String> importsList = Set<String>.new();
-  static Set<ExtractedInfoModel> pagesList = Set<ExtractedInfoModel>.new();
-  static Set<ExtractedInfoModel> controllersList = Set<ExtractedInfoModel>.new();
-  static Set<ExtractedInfoModel> componentsList = Set<ExtractedInfoModel>.new();
-  static Set<ExtractedInfoModel> repositoriesList = Set<ExtractedInfoModel>.new();
+  static Set<String> importsList = Set<String>();
+  static Set<ExtractedInfoModel> pagesList = Set<ExtractedInfoModel>();
+  static Set<ExtractedInfoModel> controllersList = Set<ExtractedInfoModel>();
+  static Set<ExtractedInfoModel> componentsList = Set<ExtractedInfoModel>();
+  static Set<ExtractedInfoModel> repositoriesList = Set<ExtractedInfoModel>();
 
   @override
   FutureOr<String?> generate(LibraryReader library, BuildStep buildStep) async {
