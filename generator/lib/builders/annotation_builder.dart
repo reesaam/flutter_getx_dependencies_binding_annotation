@@ -23,7 +23,6 @@ import '../components/log.dart';
 class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
   @override
   FutureOr<String> generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) async {
-
     // Extracting Data from all Elements and filling the data into a model to use everywhere
     ExtractedInfoModel dataModel = ExtractedInfoModel(
       element: element,
@@ -34,11 +33,8 @@ class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
       initialRoute: annotation.getIsInitial,
       unknownRoute: annotation.getIsUnknownRoute,
       lazy: annotation.getLazy,
+      fenix: annotation.getFenix,
     );
-
-    // Logging details about founded Annotation
-    GeneratorLog.info(title: '${dataModel.type} Annotation ${dataModel.name} ${dataModel.as == null ? '' : 'as ${dataModel.as}'} Found in', data: dataModel.source);
-    GeneratorLog.space();
 
     // Adding the Element in the main Generator
     final bool isAbstract = element.baseElement.toString().contains('abstract');

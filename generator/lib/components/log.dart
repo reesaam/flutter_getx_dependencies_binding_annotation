@@ -20,17 +20,17 @@ class GeneratorLog {
 
   // Different Constructors with different log types
   GeneratorLog({this.title, this.data}) : as = null {
-    print('${_logColorsNormal[0]}[$elementsMainName] $title $_data ${_logColorsNormal[1]}');
+    print('${_logColorsNormal[0]}[${PackageInfo.elementsMainName}] $title $_data ${_logColorsNormal[1]}');
   }
 
   GeneratorLog.info({this.title, this.data, this.as}) {
-    print('${_logColorsInfo[0]}[$elementsMainName] [${LogType.info.typeName}] $title $_data $_as ${_logColorsInfo[1]}');
+    print('${_logColorsInfo[0]}[${PackageInfo.elementsMainName}] [${LogType.info.typeName}] $title $_data $_as ${_logColorsInfo[1]}');
   }
   GeneratorLog.warning({this.title, this.data, this.as}) {
-    print('${_logColorsWarning[0]}[$elementsMainName] [${LogType.warning.typeName}] $title $_data $_as ${_logColorsWarning[1]}');
+    print('${_logColorsWarning[0]}[${PackageInfo.elementsMainName}] [${LogType.warning.typeName}] $title $_data $_as ${_logColorsWarning[1]}');
   }
   GeneratorLog.error({this.title, this.data}) : as = null  {
-    print('${_logColorsError[0]}[$elementsMainName] [${LogType.error.typeName}] $title $_data ${_logColorsError[1]}');
+    print('${_logColorsError[0]}[${PackageInfo.elementsMainName}] [${LogType.error.typeName}] $title $_data ${_logColorsError[1]}');
   }
   //Just add Space in the Terminal
   GeneratorLog.space() : title = null, data = null, as = null  {

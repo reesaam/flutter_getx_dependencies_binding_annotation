@@ -63,29 +63,40 @@ class CodeGenerator extends Generator {
       importsCodeBody = importsCodeBody.addImport(ImportDependencies.get.url);
       importsCodeBody = importsCodeBody.addImport(ImportDependencies.main.url);
       for (var import in importsList) {
-        if (!import.contains('/${ImportDependencies.main.url}')) importsCodeBody = importsCodeBody.addImport(import);
+        if (!import.contains('${ImportDependencies.main.url}')) importsCodeBody = importsCodeBody.addImport(import);
       }
 
       ///Statistics
       statisticsCodeBody = statisticsCodeBody.addCommentLine('Generated Library Statistics:');
-      statisticsCodeBody = statisticsCodeBody.addCommentLine('  Imports Count: ${importsList.length}');
-      statisticsCodeBody = statisticsCodeBody.addCommentLine('  Pages Count: ${pagesList.length}');
-      statisticsCodeBody = statisticsCodeBody.addCommentLine('  Controllers Count: ${controllersList.length}');
-      statisticsCodeBody = statisticsCodeBody.addCommentLine('  Components Count: ${componentsList.length}');
-      statisticsCodeBody = statisticsCodeBody.addCommentLine('  Repositories Count: ${repositoriesList.length}');
+      statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Imports Count: ${importsList.length}');
+      statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Pages Count: ${pagesList.length}');
+      statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Controllers Count: ${controllersList.length}');
+      statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Components Count: ${componentsList.length}');
+      statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Repositories Count: ${repositoriesList.length}');
 
       /// Bodies Generation
       // Pages
       String pages = Strings.empty;
+
+      /// Check Initial and Unknown Routes
+      bool hasInitial = pagesList.where((element) => element.initialRoute == true).isNotEmpty;
+      bool hasUnknown = pagesList.where((element) => element.unknownRoute == true).isNotEmpty;
+      if (!hasInitial || !hasUnknown) {
+        GeneratorLog.error(title: 'Error Occurred', data: 'Initial and/or Unknown Route has not been Set');
+        throw Exception('Error occurred, Pages and Routes can\'t be generated without Initial and Unknown Page');
+      }
+
+      /// Writing Pages Code
       for (var page in pagesList) {
         pages = pages.addLine('${_pageDependencyFormat(page)},');
         // GeneratorLog.info(title: 'Page Added ', data: page.name, as: page.as);
       }
 
       initialPageString =
-          'static GetPage get initialRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.initialRoute == true))};';
+          'static String get initialRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.initialRoute == true))}.name;';
       unknownPageString =
           'static GetPage get unknownRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.unknownRoute == true))};';
+
       pagesCodeBody = pagesCodeBody.addClass(
           className: '${AnnotationTypes.page.name.capitalizeFirst}s',
           body:
@@ -117,20 +128,20 @@ class CodeGenerator extends Generator {
           className: AnnotationTypes.repository.name.capitalizeFirst, body: repositoriesCodeBody);
 
       bindingsCodeBody = bindingsCodeBody.addLine(
-          '_$elementsMainName${AnnotationTypes.controller.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
+          '_${PackageInfo.elementsMainName}${AnnotationTypes.controller.name.capitalizeFirst}().${PackageInfo.generatedFilesDependenciesPostfix}();');
       bindingsCodeBody = bindingsCodeBody.addLine(
-          '_$elementsMainName${AnnotationTypes.component.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
+          '_${PackageInfo.elementsMainName}${AnnotationTypes.component.name.capitalizeFirst}().${PackageInfo.generatedFilesDependenciesPostfix}();');
       bindingsCodeBody = bindingsCodeBody.addLine(
-          '_$elementsMainName${AnnotationTypes.repository.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();');
+          '_${PackageInfo.elementsMainName}${AnnotationTypes.repository.name.capitalizeFirst}().${PackageInfo.generatedFilesDependenciesPostfix}();');
 
       /// CodeBody Generation
-      mainCodeBody = mainCodeBody.addLine('library;').addSpace();
-      mainCodeBody = mainCodeBody.addCommentLine(DescriptionGenerator().generate(all: true)).addSpace();
-      mainCodeBody = mainCodeBody.addLine(importsCodeBody).addSpace();
-      mainCodeBody = mainCodeBody.addLine(statisticsCodeBody).addSpace();
-      mainCodeBody = mainCodeBody.addLine(pagesCodeBody).addSpace();
-      mainCodeBody = mainCodeBody.addBindingClass(body: bindingsCodeBody).addSpace();
-      mainCodeBody = mainCodeBody.addLine(dependenciesCodeBody).addSpace();
+      mainCodeBody = mainCodeBody.addLine('library;').addSpaceAfter();
+      mainCodeBody = mainCodeBody.addCommentLine(DescriptionGenerator().generate(all: true)).addSpaceAfter();
+      mainCodeBody = mainCodeBody.addLine(importsCodeBody).addSpaceAfter();
+      mainCodeBody = mainCodeBody.addLine(statisticsCodeBody).addSpaceAfter();
+      mainCodeBody = mainCodeBody.addLine(pagesCodeBody).addSpaceAfter();
+      mainCodeBody = mainCodeBody.addBindingClass(body: bindingsCodeBody).addSpaceAfter();
+      mainCodeBody = mainCodeBody.addLine(dependenciesCodeBody).addSpaceAfter();
 
       GeneratorLog(
           title:
@@ -138,13 +149,12 @@ class CodeGenerator extends Generator {
       GeneratorLog(title: 'Code Generation Finished...');
     }
 
-    bool canPublish = mainCodeBody.isNotEmpty && canGenerate;
-    return canPublish ? mainCodeBody : null;
+    return mainCodeBody.isNotEmpty && canGenerate ? mainCodeBody : null;
   }
 
   /// This function is responsible to get the specific element that we need to process
   /// and pull it from everywhere in the codebase to here to add and keep in the lists
-  addElement(ExtractedInfoModel element) {
+  void addElement(ExtractedInfoModel element) {
     switch (element.type) {
       case AnnotationTypes.page:
         pagesList.add(element);
@@ -167,8 +177,9 @@ class CodeGenerator extends Generator {
   /// These functions are helping generating the Strings and being unified
   /// these are mostly general concepts and may use several places, so we can change them here to have the change everywhere easily
   String _pageDependencyFormat(ExtractedInfoModel element) =>
-      'GetPage(name: \'/${element.as ?? element.name}\', page: ${element.name}.new)';
+      'GetPage(name: \'/${element.as ?? element.name}\', page: ${element.name}.new,)';
+
   String _controllerDependencyFormat(ExtractedInfoModel element) => element.lazy
-      ? 'Get.lazyPut<${element.as ?? element.name}>(() => ${element.name}(), fenix: $fenix);'
+      ? 'Get.lazyPut<${element.as ?? element.name}>(() => ${element.name}(), fenix: ${element.fenix},);'
       : 'Get.put<${element.as ?? element.name}>(${element.name}());';
 }

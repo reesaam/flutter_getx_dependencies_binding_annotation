@@ -48,7 +48,7 @@ class MainApp extends StatelessWidget {
       /// ==> You must set these four functions and variables in your Project
       initialBinding: GetPutBindings(), /// Inject all dependencies
       getPages: GetPutPages.pages, /// Add all the pages in GetX context
-      initialRoute: GetPutPages.initialRoute.name, /// Set initial route
+      initialRoute: GetPutPages.initialRoute, /// Set initial route
       unknownRoute: GetPutPages.unknownRoute, /// Set a route for any unknown or undefined route in the app
     );
   }

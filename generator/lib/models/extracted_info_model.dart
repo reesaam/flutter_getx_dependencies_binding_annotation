@@ -11,6 +11,7 @@ class ExtractedInfoModel {
   final bool? initialRoute;
   final bool? unknownRoute;
   final bool lazy;
+  final bool fenix;
 
   ExtractedInfoModel({
     required this.name,
@@ -21,5 +22,6 @@ class ExtractedInfoModel {
     this.initialRoute,
     this.unknownRoute,
     this.lazy = true,
+    this.fenix = true,
   });
 }
