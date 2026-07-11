@@ -79,8 +79,8 @@ jobs:
 
       - name: Setup pub.dev credentials
         run: |
-          mkdir -p ~/.dart
-          echo "$CREDENTIALS" > ~/.dart/credentials.json
+          mkdir -p ~/.pub-cache
+          echo "$CREDENTIALS" > ~/.pub-cache/credentials.json
         env:
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
