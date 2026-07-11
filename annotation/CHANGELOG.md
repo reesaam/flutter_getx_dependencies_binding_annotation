@@ -67,14 +67,5 @@
 - Lazy Flag Added
 
 # 0.3.1
-- Version Resolve (Deprecated / Retracted)
-
-# 0.3.2
-- Version Resolve (Deprecated / Retracted)
-
-# 0.3.3
-- Version Resolve (Deprecated / Retracted)
-
-# 0.3.4
 - Version Resolve
 - Minimum Dart Version Support
