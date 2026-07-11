@@ -77,6 +77,13 @@ jobs:
 #        env:
 #          PUB_DEV: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Setup pub.dev credentials
+        run: |
+          mkdir -p ~/.pub-cache
+          echo "$CREDENTIALS" > ~/.pub-cache/credentials.json
+        env:
+          CREDENTIALS: ${{ secrets.CREDENTIALS }}
+
       - name: Debug secrets
         run: |
           echo "Access token length: ${#ACCESS_TOKEN}"
