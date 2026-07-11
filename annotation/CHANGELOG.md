@@ -68,3 +68,6 @@
 
 # 0.3.1
 - Analyzer Version Resolve
+
+# 0.3.2
+- Edit Version Ranges, especially on Generator Package

@@ -65,6 +65,9 @@
 # 0.3.0
 - Fix Some Bugs
 - Lazy Flag Added
-- 
+
 # 0.3.1
 - Analyzer Version Resolve
+
+# 0.3.2
+- Edit Version Ranges
