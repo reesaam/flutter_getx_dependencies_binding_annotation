@@ -79,8 +79,8 @@ jobs:
 
       - name: Setup pub.dev credentials
         run: |
-          mkdir -p ~/.pub-cache
-          echo "$CREDENTIALS" > ~/.pub-cache/credentials.json
+          mkdir -p ~/.dart
+          echo "$CREDENTIALS" > ~/.dart/credentials.json
         env:
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
@@ -108,6 +108,11 @@ jobs:
 #
 #      - name: Run tests
 #        run: dart test
+
+      - name: Login
+        run: dart pub login
+        env:
+          CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
       - name: Publish package
         run: dart pub publish --force
