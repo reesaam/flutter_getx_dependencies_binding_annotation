@@ -46,23 +46,13 @@ import 'main.dart';
 
 class GetPutPages {
   static List<GetPage> get pages => [
-        GetPage(
-          name: '/HomePage',
-          page: HomePage.new,
-        ),
-        GetPage(
-          name: '/NotFoundPage',
-          page: NotFoundPage.new,
-        ),
-      ];
-  static String get initialRoute => GetPage(
-        name: '/HomePage',
-        page: HomePage.new,
-      ).name;
-  static GetPage get unknownRoute => GetPage(
-        name: '/NotFoundPage',
-        page: NotFoundPage.new,
-      );
+    GetPage(name: '/HomePage', page: HomePage.new),
+    GetPage(name: '/NotFoundPage', page: NotFoundPage.new),
+  ];
+  static String get initialRoute =>
+      GetPage(name: '/HomePage', page: HomePage.new).name;
+  static GetPage get unknownRoute =>
+      GetPage(name: '/NotFoundPage', page: NotFoundPage.new);
 }
 
 class GetPutBindings implements Bindings {
@@ -77,14 +67,8 @@ class GetPutBindings implements Bindings {
 class _GetPutController extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<HomePageController>(
-      () => HomePageController(),
-      fenix: true,
-    );
-    Get.lazyPut<NotFoundController>(
-      () => NotFoundController(),
-      fenix: true,
-    );
+    Get.lazyPut<HomePageController>(() => HomePageController(), fenix: true);
+    Get.lazyPut<NotFoundController>(() => NotFoundController(), fenix: true);
   }
 }
 

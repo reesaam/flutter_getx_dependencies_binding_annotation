@@ -67,7 +67,14 @@
 - Lazy Flag Added
 
 # 0.3.1
-- Analyzer Version Resolve
+- Version Resolve (Deprecated / Retracted)
 
 # 0.3.2
-- Edit Version Ranges, especially on Generator Package
+- Version Resolve (Deprecated / Retracted)
+
+# 0.3.3
+- Version Resolve (Deprecated / Retracted)
+
+# 0.3.4
+- Version Resolve
+- Minimum Dart Version Support
