@@ -41,6 +41,9 @@ This package designed to prevent adding dependencies one by one into the lists o
 
 Add dependencies in the `pubspec.yaml`:
 ```yaml
+features:
+  dot-shorthands: true
+  
 dependencies:
   get: ^latest
   getx_binding_annotation: ^latest
