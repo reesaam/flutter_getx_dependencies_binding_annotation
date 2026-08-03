@@ -69,3 +69,7 @@
 # 0.3.1
 - Version Resolve
 - Minimum Dart Version Support
+
+# 0.4.1
+- Version Resolve
+- Minimum Dart Version Support
