@@ -7,4 +7,6 @@ enum AnnotationTypes {
   component,
   //GetX Repositories
   repository,
+  //GetX Services
+  service,
 }

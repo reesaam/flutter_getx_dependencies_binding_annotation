@@ -36,8 +36,8 @@ class RemoteDataSourceRepositoryImpl implements RemoteDataSourceRepository {}
 
 abstract class StorageComponent {}
 
-@GetPut.component()
-class StorageComponentImpl implements StorageComponent {}
+@GetPut.service()
+class LoggerService extends GetxService {}
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -45,7 +45,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'App Name',
-      /// ==> You must set these four functions and variables in your Project
+      /// ==> You [MUST] set these four functions and variables in your Project
       initialBinding: GetPutBindings(), /// Inject all dependencies
       getPages: GetPutPages.pages, /// Add all the pages in GetX context
       initialRoute: GetPutPages.initialRoute, /// Set initial route

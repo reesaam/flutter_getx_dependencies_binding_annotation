@@ -139,12 +139,10 @@ Available Options:
   - `route`: The plugin will generate a default name based on the page's name, but also, you can set a String for the route and the new route will be used. If the `route` has not been set, the default generate route will use.
   - `isInitial`: You  should set a `initialRoute` for the GetX and the app will start by that page and it's route, so it is mandatory. and you can set your initial page by this flag. The plugin would not throw an exception if you set two or more initial pages, but it will set the first page in the generate pages list that marked as initial page as the default initial route.
   - `isUnknown`: You can set a unknown route for the GetX and the app will show the page by it's route, if there was a change page without valid route. You can set your unknown page by this flag. The plugin would not throw an exception if you set two or more unknown pages, but it will set the first page in the generate pages list that marked as unknown page as the default unknown route.
-- `@GetPut.controller()`
-    - `as`: Change the Name of the Controller in the dependencies and use it as another name.
-- `@GetPut.component()`
-    - `as`: Change the Name of the Component in the dependencies and use it as another name.
-- `@GetPut.repository()`
-    - `as`: Change the Name of Repository in the dependencies and use it as another name.
+- `@GetPut.controller()` / `@GetPut.component()` / `@GetPut.repository()` / `@GetPut.service()`
+    - `as`: Change the Name of the Controller in the dependencies and use it as another name, especially using for abstracts or interfaces.
+    - `lazy`: To set binding as LazyPut.
+    - `fenix`: Set fenix.
 
 Some Examples:
 
@@ -178,6 +176,11 @@ class StorageComponentImpl {}
 ```dart
 @GetPut.repository()
 class RemoteDataSourceRepository {}
+```
+`Logger Service:`
+```dart
+@GetPut.service()
+class LoggerService extends GetxService {}
 ```
 
 ## Docs

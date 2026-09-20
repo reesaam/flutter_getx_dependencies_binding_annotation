@@ -27,6 +27,7 @@ class DescriptionGenerator {
       _addLineWithSpace('- Controllers');
       _addLineWithSpace('- Components');
       _addLineWithSpace('- Repositories');
+      _addLineWithSpace('- Services');
       _addSpace();
       _addLine('Generator will generate a file with \'.${PackageInfo.generatedFilesPrefix}.dart\' format in the lib/ root fot using in \'main.dart\'');
       _addLine('You can see how to use the generated class in the main in the GetMaterialApp as [example]');
@@ -34,7 +35,6 @@ class DescriptionGenerator {
     }
     if (all == true || packageInfo == true) {
       _addLine('Package:');
-      _addLineWithSpace('Package Last Version: [ ${PackageAuthorInfo.version} ]');
       _addLineWithSpace('Package Name: [ ${PackageAuthorInfo.packageName} ]');
       _addLineWithSpace('Package Description: [ ${PackageAuthorInfo.packageNameDescription} ]');
       _addLineWithSpace('Package Address: [ ${PackageAuthorInfo.packageAddress} ]');

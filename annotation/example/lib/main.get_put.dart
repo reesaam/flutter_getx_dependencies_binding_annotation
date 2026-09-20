@@ -16,12 +16,12 @@ library;
 ///  - Controllers
 ///  - Components
 ///  - Repositories
+///  - Services
 
 ///  Generator will generate a file with '.get_put.dart' format in the lib/ root fot using in 'main.dart'
 ///  You can see how to use the generated class in the main in the GetMaterialApp as [example]
 
 ///  Package:
-///  Package Last Version: [ 0.3.0 ]
 ///  Package Name: [ getx_binding_annotation_generator ]
 ///  Package Description: [ Getx Pages and Dependencies Binding Annotation Generator ]
 ///  Package Address: [ https://pub.dev/packages/getx_binding_annotation ]
@@ -41,8 +41,9 @@ import 'main.dart';
 /// Imports Count: 1
 /// Pages Count: 2
 /// Controllers Count: 2
-/// Components Count: 1
+/// Components Count: 0
 /// Repositories Count: 1
+/// Services Count: 1
 
 class GetPutPages {
   static List<GetPage> get pages => [
@@ -61,6 +62,7 @@ class GetPutBindings implements Bindings {
     _GetPutController().dependencies();
     _GetPutComponent().dependencies();
     _GetPutRepository().dependencies();
+    _GetPutService().dependencies();
   }
 }
 
@@ -74,12 +76,7 @@ class _GetPutController extends Bindings {
 
 class _GetPutComponent extends Bindings {
   @override
-  void dependencies() {
-    Get.lazyPut<StorageComponentImpl>(
-      () => StorageComponentImpl(),
-      fenix: true,
-    );
-  }
+  void dependencies() {}
 }
 
 class _GetPutRepository extends Bindings {
@@ -89,5 +86,12 @@ class _GetPutRepository extends Bindings {
       () => RemoteDataSourceRepositoryImpl(),
       fenix: true,
     );
+  }
+}
+
+class _GetPutService extends Bindings {
+  @override
+  void dependencies() {
+    Get.putAsync<LoggerService>(() async => LoggerService());
   }
 }

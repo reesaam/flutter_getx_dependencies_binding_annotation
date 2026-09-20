@@ -17,6 +17,7 @@ class CodeGenerator extends Generator {
   static Set<ExtractedInfoModel> controllersList = Set<ExtractedInfoModel>.new();
   static Set<ExtractedInfoModel> componentsList = Set<ExtractedInfoModel>.new();
   static Set<ExtractedInfoModel> repositoriesList = Set<ExtractedInfoModel>.new();
+  static Set<ExtractedInfoModel> servicesList = Set<ExtractedInfoModel>.new();
 
   @override
   FutureOr<String?> generate(LibraryReader library, BuildStep buildStep) async {
@@ -28,7 +29,8 @@ class CodeGenerator extends Generator {
     /// [initialPageString] in the pages section we should hold a initial page to represent to [GetX]
     /// [unknownPageString] therefore, we have a unknown route to represent
     /// [controllersCodeBody] controllers are controllers of the pages
-    /// [componentsCodeBody] components are obvious
+    /// [componentsCodeBody] components are Components of the Project
+    /// [servicesCodeBody] services are Services of the Project
     /// [repositoriesCodeBody] repositories could include all the repositories in the app, everything that you can name as repository
     /// all these 3 fields are known as Controllers in the [GetX] but they can have separate meanings or concepts
     /// so we will separate them as meanings, but they will add to the dependencies part which is the next
@@ -49,6 +51,7 @@ class CodeGenerator extends Generator {
     String controllersCodeBody = Strings.empty;
     String componentsCodeBody = Strings.empty;
     String repositoriesCodeBody = Strings.empty;
+    String servicesCodeBody = Strings.empty;
     String dependenciesCodeBody = Strings.empty;
     String bindingsCodeBody = Strings.empty;
     String mainCodeBody = Strings.empty;
@@ -73,6 +76,7 @@ class CodeGenerator extends Generator {
       statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Controllers Count: ${controllersList.length}');
       statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Components Count: ${componentsList.length}');
       statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Repositories Count: ${repositoriesList.length}');
+      statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Services Count: ${servicesList.length}');
 
       /// Bodies Generation
       // Pages
@@ -86,53 +90,33 @@ class CodeGenerator extends Generator {
         throw Exception('Error occurred, Pages and Routes can\'t be generated without Initial and Unknown Page');
       }
 
-      /// Writing Pages Code
-      for (var page in pagesList) {
-        pages = pages.addLine('${_pageDependencyFormat(page)},');
-        // GeneratorLog.info(title: 'Page Added ', data: page.name, as: page.as);
-      }
+      // Page Lines
+      for (var page in pagesList) pages = pages.addLine('${_pageDependencyFormat(page)},');
 
-      initialPageString =
-          'static String get initialRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.initialRoute == true))}.name;';
-      unknownPageString =
-          'static GetPage get unknownRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.unknownRoute == true))};';
+      initialPageString = 'static String get initialRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.initialRoute == true))}.name;';
+      unknownPageString = 'static GetPage get unknownRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.unknownRoute == true))};';
 
       pagesCodeBody = pagesCodeBody.addClass(
-          className: '${AnnotationTypes.page.name.capitalizeFirst}s',
-          body:
-              'static List<GetPage> get ${AnnotationTypes.page.name}s => [$pages\n]; $initialPageString $unknownPageString');
+        className: '${AnnotationTypes.page.name.capitalizeFirst}s',
+        body: 'static List<GetPage> get ${AnnotationTypes.page.name}s => [$pages\n]; $initialPageString $unknownPageString');
 
-      //Controllers
-      for (var controller in controllersList) {
-        controllersCodeBody = controllersCodeBody.addLine(_controllerDependencyFormat(controller));
-        // GeneratorLog.info(title: 'Controller Added ', data: controller.name, as: controller.as);
-      }
+      // Add Dependencies
+      for (var controller in controllersList) controllersCodeBody = controllersCodeBody.addLine(_controllerDependencyFormat(controller));
+      for (var component in componentsList) componentsCodeBody = componentsCodeBody.addLine(_controllerDependencyFormat(component));
+      for (var repository in repositoriesList) repositoriesCodeBody = repositoriesCodeBody.addLine(_controllerDependencyFormat(repository));
+      for (var service in servicesList) servicesCodeBody = servicesCodeBody.addLine(_serviceDependencyFormat(service));
 
-      //Components
-      for (var component in componentsList) {
-        componentsCodeBody = componentsCodeBody.addLine(_controllerDependencyFormat(component));
-        // GeneratorLog.info(title: 'Component Added ', data: component.name, as: component.as);
-      }
+      // Dependencies CodeBody
+      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.controller.name.capitalizeFirst, body: controllersCodeBody);
+      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.component.name.capitalizeFirst, body: componentsCodeBody);
+      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.repository.name.capitalizeFirst, body: repositoriesCodeBody);
+      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.service.name.capitalizeFirst, body: servicesCodeBody);
 
-      //Repositories
-      for (var repository in repositoriesList) {
-        repositoriesCodeBody = repositoriesCodeBody.addLine(_controllerDependencyFormat(repository));
-        // GeneratorLog.info(title: 'Repository Added ', data: repository.name, as: repository.as);
-      }
-
-      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(
-          className: AnnotationTypes.controller.name.capitalizeFirst, body: controllersCodeBody);
-      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(
-          className: AnnotationTypes.component.name.capitalizeFirst, body: componentsCodeBody);
-      dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(
-          className: AnnotationTypes.repository.name.capitalizeFirst, body: repositoriesCodeBody);
-
-      bindingsCodeBody = bindingsCodeBody.addLine(
-          '_${PackageInfo.elementsMainName}${AnnotationTypes.controller.name.capitalizeFirst}().${PackageInfo.generatedFilesDependenciesPostfix}();');
-      bindingsCodeBody = bindingsCodeBody.addLine(
-          '_${PackageInfo.elementsMainName}${AnnotationTypes.component.name.capitalizeFirst}().${PackageInfo.generatedFilesDependenciesPostfix}();');
-      bindingsCodeBody = bindingsCodeBody.addLine(
-          '_${PackageInfo.elementsMainName}${AnnotationTypes.repository.name.capitalizeFirst}().${PackageInfo.generatedFilesDependenciesPostfix}();');
+      // Dependencies Bindings
+      bindingsCodeBody = bindingsCodeBody.addLine(addBindingLine(annotation: AnnotationTypes.controller));
+      bindingsCodeBody = bindingsCodeBody.addLine(addBindingLine(annotation: AnnotationTypes.component));
+      bindingsCodeBody = bindingsCodeBody.addLine(addBindingLine(annotation: AnnotationTypes.repository));
+      bindingsCodeBody = bindingsCodeBody.addLine(addBindingLine(annotation: AnnotationTypes.service));
 
       /// CodeBody Generation
       mainCodeBody = mainCodeBody.addLine('library;').addSpaceAfter();
@@ -144,9 +128,15 @@ class CodeGenerator extends Generator {
       mainCodeBody = mainCodeBody.addLine(dependenciesCodeBody).addSpaceAfter();
 
       GeneratorLog(
-          title:
-              '${pagesList.length} Pages, ${controllersList.length} Controllers, ${componentsList.length} Components, and ${repositoriesList.length} Repositories Founded and Added...');
-      GeneratorLog(title: 'Code Generation Finished...');
+        title:
+            '${pagesList.length} Pages,'
+            '${controllersList.length} Controllers, '
+            '${componentsList.length} Components, '
+            '${repositoriesList.length} Repositories, '
+            '${servicesList.length} Services '
+            'Founded and Added...',
+      );
+      GeneratorLog(title: 'Code Generation Completed...');
     }
 
     return mainCodeBody.isNotEmpty && canGenerate ? mainCodeBody : null;
@@ -156,30 +146,28 @@ class CodeGenerator extends Generator {
   /// and pull it from everywhere in the codebase to here to add and keep in the lists
   void addElement(ExtractedInfoModel element) {
     switch (element.type) {
-      case AnnotationTypes.page:
-        pagesList.add(element);
-        break;
-      case AnnotationTypes.controller:
-        controllersList.add(element);
-        break;
-      case AnnotationTypes.component:
-        componentsList.add(element);
-        break;
-      case AnnotationTypes.repository:
-        repositoriesList.add(element);
-        break;
-      default:
-        break;
+      case AnnotationTypes.page: pagesList.add(element); break;
+      case AnnotationTypes.controller: controllersList.add(element); break;
+      case AnnotationTypes.component: componentsList.add(element); break;
+      case AnnotationTypes.repository: repositoriesList.add(element); break;
+      case AnnotationTypes.service: servicesList.add(element); break;
+      default: break;
     }
     importsList.add(element.source.correctImport);
   }
 
+  String addBindingLine({required AnnotationTypes annotation}) =>
+      '_${PackageInfo.elementsMainName}${annotation.name.capitalizeFirst}().${PackageInfo.generatedFilesDependenciesPostfix}();';
+
   /// These functions are helping generating the Strings and being unified
   /// these are mostly general concepts and may use several places, so we can change them here to have the change everywhere easily
   String _pageDependencyFormat(ExtractedInfoModel element) =>
-      'GetPage(name: \'/${element.as ?? element.name}\', page: ${element.name}.new,)';
+      'GetPage(name: \'/${element.as ?? element.name}\', page: ${element.name}.new)';
 
   String _controllerDependencyFormat(ExtractedInfoModel element) => element.lazy
-      ? 'Get.lazyPut<${element.as ?? element.name}>(() => ${element.name}(), fenix: ${element.fenix},);'
+      ? 'Get.lazyPut<${element.as ?? element.name}>(() => ${element.name}(), fenix: ${element.fenix});'
       : 'Get.put<${element.as ?? element.name}>(${element.name}());';
+
+  String _serviceDependencyFormat(ExtractedInfoModel element) =>
+      'Get.putAsync<${element.as ?? element.name}>(() async => ${element.name}());';
 }

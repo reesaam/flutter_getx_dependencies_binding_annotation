@@ -5,6 +5,7 @@ enum AnnotationTypes {
   controller,
   component,
   repository,
+  service,
   unknown,
 }
 

@@ -36,7 +36,7 @@ class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
       fenix: annotation.getFenix,
     );
 
-    // Adding the Element in the main Generator
+    // Adding the Element in the Main Generator
     final bool isAbstract = element.baseElement.toString().contains('abstract');
     if (isAbstract) {
       GeneratorLog.error(title: '${dataModel.name} can\'t be generated', data: 'abstract classes can\'t be generated');
