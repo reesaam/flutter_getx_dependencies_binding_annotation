@@ -73,3 +73,6 @@
 # 0.4.1
 - Version Resolve
 - Minimum Dart Version Support
+
+# 0.5.0
+- Add GetxService to Dependencies
