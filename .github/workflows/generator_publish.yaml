@@ -10,7 +10,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  generator_publish:
+  initialization:
     permissions:
       contents: write
       pull-requests: write
@@ -42,6 +42,19 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+  version_check:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    environment: PUB_DEV
+
+    defaults:
+      run:
+        working-directory: ./generator
+
+    steps:
       - name: pubspec Version Check
         run: |
           TAG_VERSION=${GITHUB_REF#refs/tags/gv}
@@ -61,21 +74,34 @@ jobs:
             exit 1
           fi
 
-#      - name: Code Analyze
-#        run: dart analyze
+      #      - name: Code Analyze
+      #        run: dart analyze
 
-#      - name: Tests Run
-#        run: dart test
+      #      - name: Tests Run
+      #        run: dart test
 
       - name: Check Dry-run Publish
         run: dart pub publish --dry-run
 
-#      - name: pub.dev Authentication
-#        run: |
-#          mkdir -p ~/.dart
-#          echo '${{ secrets.GITHUB_TOKEN }}' > ~/.dart/pub-credentials.json
-#        env:
-#          PUB_DEV: ${{ secrets.GITHUB_TOKEN }}
+  credentials:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    environment: PUB_DEV
+
+    defaults:
+      run:
+        working-directory: ./generator
+
+    steps:
+      #      - name: pub.dev Authentication
+      #        run: |
+      #          mkdir -p ~/.dart
+      #          echo '${{ secrets.GITHUB_TOKEN }}' > ~/.dart/pub-credentials.json
+      #        env:
+      #          PUB_DEV: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup pub.dev credentials
         run: |
@@ -94,19 +120,45 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
+  publish:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    environment: PUB_DEV
+
+    defaults:
+      run:
+        working-directory: ./generator
+
+    steps:
       - name: Package Publish
         uses: k-paxian/dart-package-publisher@v1.5.1
         with:
           credentialJson: ${{ secrets.CREDENTIALS }}
-#          accessToken: ${{ secrets.ACCESS_TOKEN }}
-#          refreshToken: ${{ secrets.REFRESH_TOKEN }}
+          #          accessToken: ${{ secrets.ACCESS_TOKEN }}
+          #          refreshToken: ${{ secrets.REFRESH_TOKEN }}
           skipTests: true
-#
-#      - name: Publish package
-#        run: dart pub publish --force
-#        env:
-#          PUB_DEV: ${{ secrets.GITHUB_TOKEN }}
+      #
+      #      - name: Publish package
+      #        run: dart pub publish --force
+      #        env:
+      #          PUB_DEV: ${{ secrets.GITHUB_TOKEN }}
 
+  housekeeping:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    environment: PUB_DEV
+
+    defaults:
+      run:
+        working-directory: ./generator
+
+    steps:
       - name: Release Branch Creation
         run: |
           git config user.name "github-actions[bot]"

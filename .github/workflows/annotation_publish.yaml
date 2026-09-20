@@ -10,7 +10,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  annotation_publish:
+  initialization:
     permissions:
       contents: write
       pull-requests: write
@@ -42,6 +42,19 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+  version_check:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    environment: PUB_DEV
+
+    defaults:
+      run:
+        working-directory: ./annotation
+
+    steps:
       - name: pubspec Version Check
         run: |
           TAG_VERSION=${GITHUB_REF#refs/tags/av}
@@ -61,21 +74,34 @@ jobs:
             exit 1
           fi
 
-#      - name: Code Analyze
-#        run: dart analyze
-#
-#      - name: Tests Run
-#        run: dart test
+      #      - name: Code Analyze
+      #        run: dart analyze
+      #
+      #      - name: Tests Run
+      #        run: dart test
 
       - name: Check Dry-run Publish
         run: dart pub publish --dry-run
 
-#      - name: pub.dev Authentication
-#        run: |
-#          mkdir -p ~/.dart
-#          echo '${{ secrets.GITHUB_TOKEN }}' > ~/.dart/pub-credentials.json
-#        env:
-#          PUB_DEV: ${{ secrets.GITHUB_TOKEN }}
+  credentials:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    environment: PUB_DEV
+
+    defaults:
+      run:
+        working-directory: ./annotation
+
+    steps:
+      #      - name: pub.dev Authentication
+      #        run: |
+      #          mkdir -p ~/.dart
+      #          echo '${{ secrets.GITHUB_TOKEN }}' > ~/.dart/pub-credentials.json
+      #        env:
+      #          PUB_DEV: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup pub.dev credentials
         run: |
@@ -94,31 +120,103 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
-#      - name: Package Publish Env
-#        uses: k-paxian/dart-package-publisher@v1.5.1
-#        with:
-#          credentialJson: ${{ secrets.CREDENTIALS }}
-##          accessToken: ${{ secrets.ACCESS_TOKEN }}
-##          refreshToken: ${{ secrets.REFRESH_TOKEN }}
-#          flutter: true
-#          skipTests: true
+      #      - name: Package Publish Env
+      #        uses: k-paxian/dart-package-publisher@v1.5.1
+      #        with:
+      #          credentialJson: ${{ secrets.CREDENTIALS }}
+      ##          accessToken: ${{ secrets.ACCESS_TOKEN }}
+      ##          refreshToken: ${{ secrets.REFRESH_TOKEN }}
+      #          flutter: true
+      #          skipTests: true
 
-#      - name: Analyze code
-#        run: dart analyze
-#
-#      - name: Run tests
-#        run: dart test
+      #      - name: Analyze code
+      #        run: dart analyze
+      #
+      #      - name: Run tests
+      #        run: dart test
 
       - name: Login
         run: dart pub login
         env:
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
+  publish:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    environment: PUB_DEV
+
+    defaults:
+      run:
+        working-directory: ./annotation
+
+    steps:
       - name: Publish package
         run: dart pub publish --force
         env:
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
+      - name: Release Branch Creation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          VERSION_TAG=${GITHUB_REF#refs/tags/}
+          RELEASE_BRANCH="releases/annotation_releases/$VERSION_TAG"
+
+          git checkout -b "$RELEASE_BRANCH"
+          git push origin "$RELEASE_BRANCH"
+
+      - name: Merge Release Branch to Main Feasibility
+        run: |
+          VERSION_TAG=${GITHUB_REF#refs/tags/}
+          RELEASE_BRANCH="releases/annotation_releases/$VERSION_TAG"
+
+          git fetch origin main
+          git checkout main
+
+          if git merge-tree $(git merge-base origin/main "$RELEASE_BRANCH") origin/main "$RELEASE_BRANCH" | grep -q "<<<<<<<"; then
+            echo "❌ Merge conflicts detected. Deleting release branch."
+            git push origin --delete "$RELEASE_BRANCH"
+            exit 1
+          else
+            echo "✅ Release branch can be merged cleanly into main."
+          fi
+
+      - name: Create and Merge (squash) Pull Request to main
+        run: |
+          VERSION_TAG=${GITHUB_REF#refs/tags/}
+          RELEASE_BRANCH="releases/annotation_releases/$VERSION_TAG"
+
+          sudo apt update
+          sudo apt install gh -y
+          echo "${{ secrets.ACCESS_TOKEN }} / ${{ secrets.REFRESH_TOKEN }}" | gh auth login --with-token
+
+          gh pr create \
+            --base main \
+            --head "$RELEASE_BRANCH" \
+            --title "Release $VERSION_TAG" \
+            --body "Automated release PR for version $VERSION_TAG"
+
+          PR_NUMBER=$(gh pr list --head "$RELEASE_BRANCH" --json number --jq '.[0].number')
+
+          gh pr merge "$PR_NUMBER" --squash --admin
+
+
+  housekeeping:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    environment: PUB_DEV
+
+    defaults:
+      run:
+        working-directory: ./annotation
+
+    steps:
       - name: Release Branch Creation
         run: |
           git config user.name "github-actions[bot]"
