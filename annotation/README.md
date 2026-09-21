@@ -27,6 +27,14 @@
 A Code Generator Plugin to Generate Pages and Dependencies for GetX State Manager base on Annotation.
 This package designed to prevent adding dependencies one by one into the lists of the GetX. You can use it for pages or controllers or any other dependencies.
 
+<p align="center">
+  Getx Dependencies Binding Annotation Generator Package
+</p>
+<p align="center">
+    <a href="https://pub.dev/packages/getx_binding_annotation_generator"><img src="https://img.shields.io/badge/pub-Getx_Binding_Annotation_Generator-yellowgreen?logo=pub" alt="build"></a>
+    <a href="https://github.com/reesaam/flutter_getx_dependencies_binding_annotation_generator"><img src="https://img.shields.io/badge/repo-Getx_Binding_Annotation_Generator-yellowgreen?logo=github" alt="build"></a>
+</p>
+
 ### Contents:
 * [Getting Started](#Getting-Started)
 * [Usage](#Usage)
@@ -139,24 +147,26 @@ Available Options:
   - `route`: The plugin will generate a default name based on the page's name, but also, you can set a String for the route and the new route will be used. If the `route` has not been set, the default generate route will use.
   - `isInitial`: You  should set a `initialRoute` for the GetX and the app will start by that page and it's route, so it is mandatory. and you can set your initial page by this flag. The plugin would not throw an exception if you set two or more initial pages, but it will set the first page in the generate pages list that marked as initial page as the default initial route.
   - `isUnknown`: You can set a unknown route for the GetX and the app will show the page by it's route, if there was a change page without valid route. You can set your unknown page by this flag. The plugin would not throw an exception if you set two or more unknown pages, but it will set the first page in the generate pages list that marked as unknown page as the default unknown route.
-- `@GetPut.controller()` / `@GetPut.component()` / `@GetPut.repository()` / `@GetPut.service()`
+- `@GetPut.controller()` / `@GetPut.component()` / `@GetPut.repository()`
     - `as`: Change the Name of the Controller in the dependencies and use it as another name, especially using for abstracts or interfaces.
     - `lazy`: To set binding as LazyPut.
     - `fenix`: Set fenix.
+- `@GetPut.service()`
+  - `as`: Change the Name of the Service in the dependencies and use it as another name, especially using for abstracts or interfaces.
 
 Some Examples:
 
-`Settings:`
+`Settings Page and Controller:`
 ```dart
 @GetPut.page()
 class SettingsPage extends GetView<SettingsController> {}
 ```
 ```dart
 @GetPut.controller()
-class NotFoundController extends GetxController {}
+class SettingsController extends GetxController {}
 ```
 
-`NotFound:` or `Unknown:`
+`NotFound or Unknown Page and Controller:`
 ```dart
 @GetPut.page(isUnknown: true)
 class NotFoundPage extends GetView<NotFoundController> {}
@@ -165,7 +175,7 @@ class NotFoundPage extends GetView<NotFoundController> {}
 @GetPut.controller()
 class NotFoundController extends GetxController {}
 ```
-`Storage Component:`
+`Storage Component: (uses Abstraction)`
 ```dart
 abstract class StorageComponent {}
 

@@ -13,6 +13,9 @@ class CodeGenerator extends Generator {
   /// List Variables to keep the data and then we will use them when generating the code
   /// This way everything, especially generating the code do so much faster and more efficient
   static Set<String> importsList = Set<String>.new();
+
+  /// Lists to be filled and use to generate code
+  /// Pages and Dependencies
   static Set<ExtractedInfoModel> pagesList = Set<ExtractedInfoModel>.new();
   static Set<ExtractedInfoModel> controllersList = Set<ExtractedInfoModel>.new();
   static Set<ExtractedInfoModel> componentsList = Set<ExtractedInfoModel>.new();
@@ -56,20 +59,20 @@ class CodeGenerator extends Generator {
     String bindingsCodeBody = Strings.empty;
     String mainCodeBody = Strings.empty;
 
-    /// generator could generate everywhere and with every file
+    /// Generator could generate everywhere and with every file
     /// it will be restricted this way to generate specific file and save resources
     bool canGenerate = library.element.uri.path.contains(ImportDependencies.main.url);
     if (canGenerate) {
       GeneratorLog(title: 'Code Generation Started...');
 
-      /// Imports
+      /// Imports Generation
       importsCodeBody = importsCodeBody.addImport(ImportDependencies.get.url);
       importsCodeBody = importsCodeBody.addImport(ImportDependencies.main.url);
       for (var import in importsList) {
         if (!import.contains('${ImportDependencies.main.url}')) importsCodeBody = importsCodeBody.addImport(import);
       }
 
-      ///Statistics
+      /// Statistics
       statisticsCodeBody = statisticsCodeBody.addCommentLine('Generated Library Statistics:');
       statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Imports Count: ${importsList.length}');
       statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Pages Count: ${pagesList.length}');
@@ -79,10 +82,11 @@ class CodeGenerator extends Generator {
       statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace('Services Count: ${servicesList.length}');
 
       /// Bodies Generation
-      // Pages
+      /// Pages
       String pages = Strings.empty;
 
-      /// Check Initial and Unknown Routes
+      /// Check [Initial] and [Unknown] Routes
+      /// [Initial] and [unknown] Pages are mandatory
       bool hasInitial = pagesList.where((element) => element.initialRoute == true).isNotEmpty;
       bool hasUnknown = pagesList.where((element) => element.unknownRoute == true).isNotEmpty;
       if (!hasInitial || !hasUnknown) {
@@ -90,9 +94,10 @@ class CodeGenerator extends Generator {
         throw Exception('Error occurred, Pages and Routes can\'t be generated without Initial and Unknown Page');
       }
 
-      // Page Lines
+      /// Page Lines
       for (var page in pagesList) pages = pages.addLine('${_pageDependencyFormat(page)},');
 
+      /// [InitialPage] and [UnknownPage] Page Lines
       initialPageString = 'static String get initialRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.initialRoute == true))}.name;';
       unknownPageString = 'static GetPage get unknownRoute => ${_pageDependencyFormat(pagesList.firstWhere((value) => value.unknownRoute == true))};';
 
@@ -100,23 +105,23 @@ class CodeGenerator extends Generator {
         className: '${AnnotationTypes.page.name.capitalizeFirst}s',
         body: 'static List<GetPage> get ${AnnotationTypes.page.name}s => [$pages\n]; $initialPageString $unknownPageString');
 
-      // Add Dependencies
+      /// Add Dependencies
       for (var controller in controllersList) controllersCodeBody = controllersCodeBody.addLine(_controllerDependencyFormat(controller));
       for (var component in componentsList) componentsCodeBody = componentsCodeBody.addLine(_controllerDependencyFormat(component));
       for (var repository in repositoriesList) repositoriesCodeBody = repositoriesCodeBody.addLine(_controllerDependencyFormat(repository));
       for (var service in servicesList) servicesCodeBody = servicesCodeBody.addLine(_serviceDependencyFormat(service));
 
-      // Dependencies CodeBody
+      /// Dependencies CodeBody
       dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.controller.name.capitalizeFirst, body: controllersCodeBody);
       dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.component.name.capitalizeFirst, body: componentsCodeBody);
       dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.repository.name.capitalizeFirst, body: repositoriesCodeBody);
       dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.service.name.capitalizeFirst, body: servicesCodeBody);
 
-      // Dependencies Bindings
-      bindingsCodeBody = bindingsCodeBody.addLine(addBindingLine(annotation: AnnotationTypes.controller));
-      bindingsCodeBody = bindingsCodeBody.addLine(addBindingLine(annotation: AnnotationTypes.component));
-      bindingsCodeBody = bindingsCodeBody.addLine(addBindingLine(annotation: AnnotationTypes.repository));
-      bindingsCodeBody = bindingsCodeBody.addLine(addBindingLine(annotation: AnnotationTypes.service));
+      /// Dependencies Bindings
+      bindingsCodeBody = bindingsCodeBody.addLine(_addBindingLine(annotation: AnnotationTypes.controller));
+      bindingsCodeBody = bindingsCodeBody.addLine(_addBindingLine(annotation: AnnotationTypes.component));
+      bindingsCodeBody = bindingsCodeBody.addLine(_addBindingLine(annotation: AnnotationTypes.repository));
+      bindingsCodeBody = bindingsCodeBody.addLine(_addBindingLine(annotation: AnnotationTypes.service));
 
       /// CodeBody Generation
       mainCodeBody = mainCodeBody.addLine('library;').addSpaceAfter();
@@ -156,7 +161,7 @@ class CodeGenerator extends Generator {
     importsList.add(element.source.correctImport);
   }
 
-  String addBindingLine({required AnnotationTypes annotation}) =>
+  String _addBindingLine({required AnnotationTypes annotation}) =>
       '_${PackageInfo.elementsMainName}${annotation.name.capitalizeFirst}().${PackageInfo.generatedFilesDependenciesPostfix}();';
 
   /// These functions are helping generating the Strings and being unified

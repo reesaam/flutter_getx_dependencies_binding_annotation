@@ -8,6 +8,7 @@ import '../resources/strings.dart';
 class DescriptionGenerator {
   String result = '';
 
+  /// Description Generation Function
   String generate({
     bool? all,
     bool? caution,
@@ -15,10 +16,12 @@ class DescriptionGenerator {
     bool? packageInfo,
     bool? description,
   }) {
+    /// Caution Phrase Lines
     if (all == true || caution == true) {
       _addLine(_caution);
       _addSpace();
     }
+    /// Description Phrase Lines
     if (all == true || description == true) {
       _addLine('Dependencies binding annotation generator for [ GetX State Manager ]');
       _addLine('This file will provide mandatory dependencies for [ GetMaterialApp ]');
@@ -33,6 +36,7 @@ class DescriptionGenerator {
       _addLine('You can see how to use the generated class in the main in the GetMaterialApp as [example]');
       _addBigSpace();
     }
+    /// Package Info Lines
     if (all == true || packageInfo == true) {
       _addLine('Package:');
       _addLineWithSpace('Package Name: [ ${PackageAuthorInfo.packageName} ]');
@@ -41,6 +45,7 @@ class DescriptionGenerator {
       _addLineWithSpace('Package GitHubRepositoryAddress: [ ${PackageAuthorInfo.packageGitHubRepositoryAddress} ]');
       _addBigSpace();
     }
+    /// Author Info Lines
     if (all == true || authorInfo == true) {
       _addLine('Written and Provided by:');
       _addLineWithSpace('[ ${PackageAuthorInfo.authorName} ]');
@@ -53,6 +58,7 @@ class DescriptionGenerator {
     return result;
   }
 
+  /// Caution String
   String get _caution => 'GENERATED CODE - DO NOT MODIFY BY HAND EVER';
 
   String _addLine(String line, {bool? space}) => result += '///  ${space == true ? Strings.space : Strings.empty}$line\n';

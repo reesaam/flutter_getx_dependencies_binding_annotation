@@ -7,18 +7,18 @@ import '../resources/enums.dart';
 
 class GeneratorLog {
 
-  // Colors
+  ///  Colors
   final _logColorsNormal = ['\x1B[32m', '\x1B[0m'];
   final _logColorsInfo = ['\x1B[35m', '\x1B[0m'];
   final _logColorsWarning = ['\x1B[33m', '\x1B[0m'];
   final _logColorsError = ['\x1B[31m', '\x1B[0m'];
 
-  //Variables
+  /// Variables
   final String? title;
   final String? as;
   final dynamic data;
 
-  // Different Constructors with different log types
+  /// Different Constructors with different log types
   GeneratorLog({this.title, this.data}) : as = null {
     print('${_logColorsNormal[0]}[${PackageInfo.elementsMainName}] $title $_data ${_logColorsNormal[1]}');
   }
@@ -32,7 +32,7 @@ class GeneratorLog {
   GeneratorLog.error({this.title, this.data}) : as = null  {
     print('${_logColorsError[0]}[${PackageInfo.elementsMainName}] [${LogType.error.typeName}] $title $_data ${_logColorsError[1]}');
   }
-  //Just add Space in the Terminal
+  /// Just add Space in the Terminal
   GeneratorLog.space() : title = null, data = null, as = null  {
     print('\n');
   }

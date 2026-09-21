@@ -2,6 +2,7 @@ import 'package:analyzer/dart/element/element.dart';
 
 import '../resources/enums.dart';
 
+/// Extracted Data from [Annotation] will collect in this Model
 class ExtractedInfoModel {
   final String name;
   final String? as;

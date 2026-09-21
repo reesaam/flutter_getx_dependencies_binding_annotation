@@ -76,3 +76,7 @@
 
 # 0.5.0
 - Add GetxService to Dependencies
+
+# 0.5.1
+- Documentation
+- ReadMe

@@ -23,7 +23,7 @@ import '../components/log.dart';
 class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
   @override
   FutureOr<String> generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) async {
-    // Extracting Data from all Elements and filling the data into a model to use everywhere
+    /// Extracting Data from all Elements and filling the data into a model to use everywhere
     ExtractedInfoModel dataModel = ExtractedInfoModel(
       element: element,
       source: element.library?.uri.path ?? Strings.unknown,
@@ -36,8 +36,9 @@ class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
       fenix: annotation.getFenix,
     );
 
-    // Adding the Element in the Main Generator
+    /// Adding the Element in the Main Generator
     final bool isAbstract = element.baseElement.toString().contains('abstract');
+
     if (isAbstract) {
       GeneratorLog.error(title: '${dataModel.name} can\'t be generated', data: 'abstract classes can\'t be generated');
       throw Exception('On ${dataModel.name} error occurred, abstract classes can\'t be generated');

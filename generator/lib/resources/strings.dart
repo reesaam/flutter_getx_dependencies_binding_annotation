@@ -1,6 +1,8 @@
+/// Constant Strings to use in the Project
+
 class Strings {
   static String get empty => '';
-  static String get space => '';
+  static String get space => ' ';
   static String get unknown => 'Unknown';
 
   /// Annotation Arguments

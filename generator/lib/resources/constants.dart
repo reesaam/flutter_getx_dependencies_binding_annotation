@@ -1,3 +1,4 @@
+/// Package Information
 class PackageInfo {
   static String get elementsMainName => 'GetPut';
   static String get generatedFilesPrefix => 'get_put';

@@ -11,10 +11,12 @@ extension GeneralCodeAddTools on String {
 
 extension GeneralCodeSnippetAddTools on String {
   String addImport(String path) => addLine('import \'$path\';');
-  String addClass({required String className, required String body}) =>
-      addLine('class ${PackageInfo.elementsMainName}$className {$body}');
+
+  String addClass({required String className, required String body}) => addLine('class ${PackageInfo.elementsMainName}$className {$body}');
+
   String addDependencyClass({required String className, required String body}) => addLine(
       'class _${PackageInfo.elementsMainName}$className extends Bindings {@override void ${PackageInfo.generatedFilesDependenciesPostfix}() {$body}}');
+
   String addBindingClass({required String body}) => addLine(
       'class ${PackageInfo.elementsMainName}Bindings implements Bindings {@override void ${PackageInfo.generatedFilesDependenciesPostfix}() {$body}}');
 }

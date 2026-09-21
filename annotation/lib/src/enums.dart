@@ -1,12 +1,12 @@
 enum AnnotationTypes {
-  //GetX Pages
+  /// GetX Pages
   page,
-  //GetX Controllers
+  /// GetX Controllers
   controller,
-  //GetX Components
+  /// GetX Components
   component,
-  //GetX Repositories
+  /// GetX Repositories
   repository,
-  //GetX Services
+  /// GetX Services
   service,
 }

@@ -23,35 +23,35 @@ class GetPut {
   final bool lazy;
   final bool? fenix;
 
-  //GetX Pages
-  //Pages will decorated with this Annotation to be distinct
+  /// GetX Pages
+  /// Pages will decorated with this Annotation to be distinct
   const GetPut.page({this.as, this.route, this.isInitial, this.isUnknown}) : type = AnnotationTypes.page, lazy = true, fenix = null;
 
-  //GetX Controllers
-  //Controllers will decorated with this Annotation to be distinct
+  /// GetX Controllers
+  /// Controllers will decorated with this Annotation to be distinct
   const GetPut.controller({this.as, this.lazy = true, this.fenix})
     : type = AnnotationTypes.controller,
       route = null,
       isInitial = null,
       isUnknown = null;
 
-  //GetX Components
-  //Components will decorated with this Annotation to be distinct
+  /// GetX Components
+  /// Components will decorated with this Annotation to be distinct
   const GetPut.component({this.as, this.lazy = true, this.fenix})
     : type = AnnotationTypes.component,
       route = null,
       isInitial = null,
       isUnknown = null;
 
-  //GetX Repositories
-  //Repositories will decorated with this Annotation to be distinct
+  /// GetX Repositories
+  /// Repositories will decorated with this Annotation to be distinct
   const GetPut.repository({this.as, this.lazy = true, this.fenix})
     : type = AnnotationTypes.repository,
       route = null,
       isInitial = null,
       isUnknown = null;
 
-  //GetX Services
-  //Services will decorated with this Annotation to be distinct
-  const GetPut.service({this.as, this.lazy = true, this.fenix}) : type = AnnotationTypes.service, route = null, isInitial = null, isUnknown = null;
+  /// GetX Services
+  /// Services will decorated with this Annotation to be distinct
+  const GetPut.service({this.as}) : type = AnnotationTypes.service, route = null, isInitial = null, isUnknown = null, lazy = false, fenix = null;
 }

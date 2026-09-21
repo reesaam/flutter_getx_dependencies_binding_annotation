@@ -1,3 +1,4 @@
+/// Package Author Information
 class PackageAuthorInfo {
   static String get packageName => 'getx_binding_annotation_generator';
   static String get packageNameDescription => 'Getx Pages and Dependencies Binding Annotation Generator';

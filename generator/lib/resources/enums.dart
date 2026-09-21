@@ -1,5 +1,8 @@
 import '../extensions/string.dart';
 
+/// Major Enums
+
+
 enum AnnotationTypes {
   page,
   controller,
@@ -27,6 +30,5 @@ enum LogType {
   error();
 
   const LogType();
-
   String get typeName => this.name.capitalizeFirst;
 }
