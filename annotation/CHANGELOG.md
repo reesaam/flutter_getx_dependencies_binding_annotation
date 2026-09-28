@@ -80,3 +80,6 @@
 # 0.5.1
 - Documentation
 - ReadMe
+
+# 0.5.2
+- Fix 'as' for abstracts and inheritances
