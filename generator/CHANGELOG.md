@@ -83,3 +83,6 @@
 
 # 0.5.2
 - Fix 'as' for abstracts and inheritances
+
+# 0.5.3
+- Fix Seperated Files Abstraction Build Import
