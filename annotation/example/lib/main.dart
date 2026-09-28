@@ -45,7 +45,7 @@ class RemoteDataSourceRepositoryImpl implements RemoteDataSourceRepository {}
 /// How [Components] can be implemented
 abstract class StorageComponent {}
 
-@GetPut.component()
+@GetPut.component(as: StorageComponent)
 class StorageComponentImpl implements StorageComponent {}
 
 /// How [Services] can be implemented

@@ -134,7 +134,7 @@ class CodeGenerator extends Generator {
 
       GeneratorLog(
         title:
-            '${pagesList.length} Pages,'
+            '${pagesList.length} Pages, '
             '${controllersList.length} Controllers, '
             '${componentsList.length} Components, '
             '${repositoriesList.length} Repositories, '

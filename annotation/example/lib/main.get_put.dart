@@ -12,38 +12,38 @@ library;
 ///  Dependencies binding annotation generator for [ GetX State Manager ]
 ///  This file will provide mandatory dependencies for [ GetMaterialApp ]
 ///  Including:
-///  - Pages
-///  - Controllers
-///  - Components
-///  - Repositories
-///  - Services
+///   - Pages
+///   - Controllers
+///   - Components
+///   - Repositories
+///   - Services
 
 ///  Generator will generate a file with '.get_put.dart' format in the lib/ root fot using in 'main.dart'
 ///  You can see how to use the generated class in the main in the GetMaterialApp as [example]
 
 ///  Package:
-///  Package Name: [ getx_binding_annotation_generator ]
-///  Package Description: [ Getx Pages and Dependencies Binding Annotation Generator ]
-///  Package Address: [ https://pub.dev/packages/getx_binding_annotation ]
-///  Package GitHubRepositoryAddress: [ https://github.com/reesaam/flutter_getx_dependencies_binding_annotation ]
+///   Package Name: [ getx_binding_annotation_generator ]
+///   Package Description: [ Getx Pages and Dependencies Binding Annotation Generator ]
+///   Package Address: [ https://pub.dev/packages/getx_binding_annotation ]
+///   Package GitHubRepositoryAddress: [ https://github.com/reesaam/flutter_getx_dependencies_binding_annotation ]
 
 ///  Written and Provided by:
-///  [ Resam Taghipour ]
-///  Email: [ resam.t@gmail.com ]
-///  Website: [ https://www.resam.site ]
-///  LinkedIn: [ https://www.linkedin.com/in/resam ]
-///  GitHub: [ https://github.com/reesaam ]
+///   [ Resam Taghipour ]
+///   Email: [ resam.t@gmail.com ]
+///   Website: [ https://www.resam.site ]
+///   LinkedIn: [ https://www.linkedin.com/in/resam ]
+///   GitHub: [ https://github.com/reesaam ]
 
 import 'package:get/get.dart';
 import 'main.dart';
 
 /// Generated Library Statistics:
-/// Imports Count: 1
-/// Pages Count: 2
-/// Controllers Count: 2
-/// Components Count: 0
-/// Repositories Count: 1
-/// Services Count: 1
+///  Imports Count: 1
+///  Pages Count: 2
+///  Controllers Count: 2
+///  Components Count: 1
+///  Repositories Count: 1
+///  Services Count: 1
 
 class GetPutPages {
   static List<GetPage> get pages => [
@@ -76,13 +76,15 @@ class _GetPutController extends Bindings {
 
 class _GetPutComponent extends Bindings {
   @override
-  void dependencies() {}
+  void dependencies() {
+    Get.lazyPut<StorageComponent>(() => StorageComponentImpl(), fenix: true);
+  }
 }
 
 class _GetPutRepository extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<RemoteDataSourceRepositoryImpl>(
+    Get.lazyPut<RemoteDataSourceRepository>(
       () => RemoteDataSourceRepositoryImpl(),
       fenix: true,
     );

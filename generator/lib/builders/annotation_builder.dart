@@ -43,6 +43,7 @@ class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
       GeneratorLog.error(title: '${dataModel.name} can\'t be generated', data: 'abstract classes can\'t be generated');
       throw Exception('On ${dataModel.name} error occurred, abstract classes can\'t be generated');
     } else {
+      GeneratorLog.info(title: 'CodeGenerator AddElement ${dataModel.name}');
       CodeGenerator().addElement(dataModel);
     }
     return Strings.empty;
