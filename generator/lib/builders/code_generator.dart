@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 import '../components/descriptions_generator.dart';
@@ -159,6 +160,11 @@ class CodeGenerator extends Generator {
       default: break;
     }
     importsList.add(element.source.correctImport);
+    if (element.asType?.element?.library != null) {
+      String path = LibraryReader(element.asType!.element!.library!).pathToElement(element.asType!.element!).path.toString();
+      String correctedPath = path.replaceFirst(path.split('/').first, '').replaceFirst('/', '');
+      importsList.add(correctedPath);
+    }
   }
 
   String _addBindingLine({required AnnotationTypes annotation}) =>

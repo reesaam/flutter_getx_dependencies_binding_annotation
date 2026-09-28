@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/element/type.dart';
 import 'package:source_gen/source_gen.dart';
 import '../resources/strings.dart';
 
@@ -15,6 +16,7 @@ extension GetData on ConstantReader {
 
   /// GetAs Extension on [ConstantReader]
   String? get getAs => revive().namedArguments[Strings.annotationArgumentAs]?.toTypeValue().toString();
+  DartType? get getAsType => revive().namedArguments[Strings.annotationArgumentAs]?.toTypeValue();
 
   /// GetFenix Extension on [ConstantReader]
   bool get getFenix => revive().namedArguments[Strings.annotationArgumentFenix]?.toBoolValue() ?? true;

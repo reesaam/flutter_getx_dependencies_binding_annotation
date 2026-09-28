@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 
 import '../resources/enums.dart';
 
@@ -6,6 +7,7 @@ import '../resources/enums.dart';
 class ExtractedInfoModel {
   final String name;
   final String? as;
+  final DartType? asType;
   final Element element;
   final String source;
   final AnnotationTypes type;
@@ -17,6 +19,7 @@ class ExtractedInfoModel {
   ExtractedInfoModel({
     required this.name,
     this.as,
+    this.asType,
     required this.element,
     required this.source,
     required this.type,

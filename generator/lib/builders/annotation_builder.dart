@@ -30,6 +30,7 @@ class AnnotationBuilder extends GeneratorForAnnotation<GetPut> {
       type: element.metadata.annotations.first.element?.name?.getAnnotationType ?? AnnotationTypes.unknown,
       name: element.name ?? Strings.unknown,
       as: annotation.getAs,
+      asType: annotation.getAsType,
       initialRoute: annotation.getIsInitial,
       unknownRoute: annotation.getIsUnknownRoute,
       lazy: annotation.getLazy,
