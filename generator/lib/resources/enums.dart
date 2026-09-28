@@ -1,8 +1,14 @@
+import '../extensions/string.dart';
+
+/// Major Enums
+
+
 enum AnnotationTypes {
   page,
   controller,
   component,
   repository,
+  service,
   unknown,
 }
 
@@ -18,11 +24,11 @@ enum ImportDependencies {
 }
 
 enum LogType {
-  normal(''),
-  info('Info'),
-  warning('Warning'),
-  error('Error');
+  normal(),
+  info(),
+  warning(),
+  error();
 
-  final String typeName;
-  const LogType(this.typeName);
+  const LogType();
+  String get typeName => this.name.capitalizeFirst;
 }

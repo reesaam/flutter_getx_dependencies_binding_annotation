@@ -65,3 +65,24 @@
 # 0.3.0
 - Fix Some Bugs
 - Lazy Flag Added
+
+# 0.3.1
+- Version Resolve
+- Minimum Dart Version Support
+
+# 0.4.1
+- Version Resolve
+- Minimum Dart Version Support
+
+# 0.5.0
+- Add GetxService to Dependencies
+
+# 0.5.1
+- Documentation
+- ReadMe
+
+# 0.5.2
+- Fix 'as' for abstracts and inheritances
+
+# 0.5.3
+- Fix Seperated Files Abstraction Build Import

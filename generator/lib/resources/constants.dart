@@ -1,4 +1,7 @@
-String get elementsMainName => 'GetPut';
-String get generatedFilesPrefix => 'get_put';
-String get generatedFilesDependenciesPostfix => 'dependencies';
-String get fenix => 'true';
+/// Package Information
+class PackageInfo {
+  static String get elementsMainName => 'GetPut';
+  static String get generatedFilesPrefix => 'get_put';
+  static String get generatedFilesDependenciesPostfix => 'dependencies';
+  static String get fenix => 'true';
+}

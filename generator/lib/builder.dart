@@ -5,6 +5,11 @@ import 'builders/annotation_builder.dart';
 import 'builders/code_generator.dart';
 import 'resources/constants.dart';
 
-Builder annotationBuilder(BuilderOptions options) => SharedPartBuilder([AnnotationBuilder()], generatedFilesPrefix);
+/// Major Builder and Generator
+/// These will Start the build and generation procedures
 
-Builder codeGenerator(BuilderOptions options) => LibraryBuilder(CodeGenerator(), generatedExtension: '.$generatedFilesPrefix.dart');
+Builder annotationBuilder(BuilderOptions options) =>
+    SharedPartBuilder([AnnotationBuilder()], PackageInfo.generatedFilesPrefix);
+
+Builder codeGenerator(BuilderOptions options) =>
+    LibraryBuilder(CodeGenerator(), generatedExtension: '.${PackageInfo.generatedFilesPrefix}.dart');

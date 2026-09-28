@@ -16,20 +16,16 @@
   <link rel="stylesheet" href="../../static-assets/github.css?v1">
   <link rel="stylesheet" href="../../static-assets/styles.css?v1">
   <link rel="icon" href="../../static-assets/favicon.png?v1">
-
   
 </head>
 
-
 <body data-base-href="../../" data-using-base-href="false" class="light-theme">
-
 <div id="overlay-under-drawer"></div>
-
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">getx_binding_annotation_generator</a></li>
-    <li><a href="../../builders_code_generator/builders_code_generator-library.html">builders\code_generator.dart</a></li>
+    <li><a href="../../builders_code_generator/">builders\code_generator.dart</a></li>
     <li><a href="../../builders_code_generator/CodeGenerator-class.html">CodeGenerator</a></li>
     <li class="self-crumb">generate method</li>
   </ol>
@@ -37,20 +33,16 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button" title="Toggle brightness">
-    <label for="theme">
-      <input type="checkbox" id="theme" value="light-theme">
-      <span id="dark-theme-button" class="material-symbols-outlined">
-        dark_mode
-      </span>
-      <span id="light-theme-button" class="material-symbols-outlined">
-        light_mode
-      </span>
-    </label>
-  </div>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
 </header>
 <main>
-
 <div
     id="dartdoc-main-content"
     class="main-content"
@@ -64,13 +56,12 @@
       
   <div>
     <ol class="annotation-list">
-        <li>@<a href="https://api.dart.dev/stable/3.5.3/dart-core/override-constant.html">override</a></li>
+        <li>@<a href="https://api.flutter.dev/flutter/dart-core/override-constant.html">override</a></li>
     </ol>
   </div>
-
-<span class="returntype"><a href="https://api.dart.dev/stable/3.5.3/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.5.3/dart-core/String-class.html">String</a>?</span>&gt;</span></span>
-<span class="name ">generate</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="generate-param-library"><span class="type-annotation"><a href="https://pub.dev/documentation/source_gen/1.5.0/source_gen/LibraryReader-class.html">LibraryReader</a></span> <span class="parameter-name">library</span>, </span></li>
-<li><span class="parameter" id="generate-param-buildStep"><span class="type-annotation"><a href="https://pub.dev/documentation/build/2.4.1/build/BuildStep-class.html">BuildStep</a></span> <span class="parameter-name">buildStep</span></span></li>
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span>&gt;</span></span>
+<span class="name ">generate</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="generate-param-library"><span class="type-annotation"><a href="https://pub.dev/documentation/source_gen/4.2.4/source_gen/LibraryReader-class.html">LibraryReader</a></span> <span class="parameter-name">library</span>, </span></li>
+<li><span class="parameter" id="generate-param-buildStep"><span class="type-annotation"><a href="https://pub.dev/documentation/build/4.0.7/build/BuildStep-class.html">BuildStep</a></span> <span class="parameter-name">buildStep</span></span></li>
 </ol>)
 
       <div class="features"><span class="feature">override</span></div>
@@ -91,7 +82,6 @@ null or the empty string.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 FutureOr&lt;String?&gt; generate(LibraryReader library, BuildStep buildStep) async {
-
   &#47;&#47;&#47; String Variables
   &#47;&#47;&#47; These variables will keep strings of generated code separately
   &#47;&#47;&#47; [statisticsCodeBody] the package will generate some statistics about received code which will put at the top of generated code
@@ -100,7 +90,8 @@ FutureOr&lt;String?&gt; generate(LibraryReader library, BuildStep buildStep) asy
   &#47;&#47;&#47; [initialPageString] in the pages section we should hold a initial page to represent to [GetX]
   &#47;&#47;&#47; [unknownPageString] therefore, we have a unknown route to represent
   &#47;&#47;&#47; [controllersCodeBody] controllers are controllers of the pages
-  &#47;&#47;&#47; [componentsCodeBody] components are obvious
+  &#47;&#47;&#47; [componentsCodeBody] components are Components of the Project
+  &#47;&#47;&#47; [servicesCodeBody] services are Services of the Project
   &#47;&#47;&#47; [repositoriesCodeBody] repositories could include all the repositories in the app, everything that you can name as repository
   &#47;&#47;&#47; all these 3 fields are known as Controllers in the [GetX] but they can have separate meanings or concepts
   &#47;&#47;&#47; so we will separate them as meanings, but they will add to the dependencies part which is the next
@@ -121,89 +112,102 @@ FutureOr&lt;String?&gt; generate(LibraryReader library, BuildStep buildStep) asy
   String controllersCodeBody = Strings.empty;
   String componentsCodeBody = Strings.empty;
   String repositoriesCodeBody = Strings.empty;
+  String servicesCodeBody = Strings.empty;
   String dependenciesCodeBody = Strings.empty;
   String bindingsCodeBody = Strings.empty;
   String mainCodeBody = Strings.empty;
 
-  &#47;&#47;&#47; generator could generate everywhere and with every file
+  &#47;&#47;&#47; Generator could generate everywhere and with every file
   &#47;&#47;&#47; it will be restricted this way to generate specific file and save resources
-  bool canGenerate = library.element.source.uri.path.contains(ImportDependencies.main.url);
-  if(canGenerate) {
+  bool canGenerate = library.element.uri.path.contains(ImportDependencies.main.url);
+  if (canGenerate) {
     GeneratorLog(title: &#39;Code Generation Started...&#39;);
 
-    &#47;&#47;&#47; Imports
+    &#47;&#47;&#47; Imports Generation
     importsCodeBody = importsCodeBody.addImport(ImportDependencies.get.url);
-    for(var import in importsList) {
-      importsCodeBody = importsCodeBody.addImport(_findSourceImport(import).correctImport);
+    importsCodeBody = importsCodeBody.addImport(ImportDependencies.main.url);
+    for (var import in importsList) {
+      if (!import.contains(&#39;${ImportDependencies.main.url}&#39;)) importsCodeBody = importsCodeBody.addImport(import);
     }
 
-    &#47;&#47;&#47;Statistics
+    &#47;&#47;&#47; Statistics
     statisticsCodeBody = statisticsCodeBody.addCommentLine(&#39;Generated Library Statistics:&#39;);
-    statisticsCodeBody = statisticsCodeBody.addCommentLine(&#39;  Imports Count: ${importsList.length}&#39;);
-    statisticsCodeBody = statisticsCodeBody.addCommentLine(&#39;  Pages Count: ${pagesList.length}&#39;);
-    statisticsCodeBody = statisticsCodeBody.addCommentLine(&#39;  Controllers Count: ${controllersList.length}&#39;);
-    statisticsCodeBody = statisticsCodeBody.addCommentLine(&#39;  Components Count: ${componentsList.length}&#39;);
-    statisticsCodeBody = statisticsCodeBody.addCommentLine(&#39;  Repositories Count: ${repositoriesList.length}&#39;);
+    statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace(&#39;Imports Count: ${importsList.length}&#39;);
+    statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace(&#39;Pages Count: ${pagesList.length}&#39;);
+    statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace(&#39;Controllers Count: ${controllersList.length}&#39;);
+    statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace(&#39;Components Count: ${componentsList.length}&#39;);
+    statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace(&#39;Repositories Count: ${repositoriesList.length}&#39;);
+    statisticsCodeBody = statisticsCodeBody.addCommentLineWithSpace(&#39;Services Count: ${servicesList.length}&#39;);
 
     &#47;&#47;&#47; Bodies Generation
-    &#47;&#47; Pages
+    &#47;&#47;&#47; Pages
     String pages = Strings.empty;
-    for (var page in pagesList) {
-      pages = pages.addLine(&#39;${_pageDependencyFormat(page)},&#39;);
-      GeneratorLog.info(title: &#39;Page Added to Pages&#39;, data: page.name, as: page.as);
+
+    &#47;&#47;&#47; Check [Initial] and [Unknown] Routes
+    &#47;&#47;&#47; [Initial] and [unknown] Pages are mandatory
+    bool hasInitial = pagesList.where((element) =&gt; element.initialRoute == true).isNotEmpty;
+    bool hasUnknown = pagesList.where((element) =&gt; element.unknownRoute == true).isNotEmpty;
+    if (!hasInitial || !hasUnknown) {
+      GeneratorLog.error(title: &#39;Error Occurred&#39;, data: &#39;Initial and&#47;or Unknown Route has not been Set&#39;);
+      throw Exception(&#39;Error occurred, Pages and Routes can\&#39;t be generated without Initial and Unknown Page&#39;);
     }
 
-    initialPageString = &#39;static GetPage get initialRoute =&gt; ${_pageDependencyFormat(pagesList.firstWhere((value) =&gt; value.initialRoute == true))};&#39;;
+    &#47;&#47;&#47; Page Lines
+    for (var page in pagesList) pages = pages.addLine(&#39;${_pageDependencyFormat(page)},&#39;);
+
+    &#47;&#47;&#47; [InitialPage] and [UnknownPage] Page Lines
+    initialPageString = &#39;static String get initialRoute =&gt; ${_pageDependencyFormat(pagesList.firstWhere((value) =&gt; value.initialRoute == true))}.name;&#39;;
     unknownPageString = &#39;static GetPage get unknownRoute =&gt; ${_pageDependencyFormat(pagesList.firstWhere((value) =&gt; value.unknownRoute == true))};&#39;;
-    pagesCodeBody = pagesCodeBody.addClass(className: &#39;${AnnotationTypes.page.name.capitalizeFirst}s&#39;, body: &#39;static List&lt;GetPage&gt; get ${AnnotationTypes.page.name}s =&gt; [${pages}\n]; $initialPageString $unknownPageString&#39;);
 
-    &#47;&#47;Controllers
-    for(var controller in controllersList) {
-      controllersCodeBody = controllersCodeBody.addLine(_controllerDependencyFormat(controller));
-      GeneratorLog.info(title: &#39;Controller Added to Pages&#39;, data: controller.name, as: controller.as);
-    }
+    pagesCodeBody = pagesCodeBody.addClass(
+      className: &#39;${AnnotationTypes.page.name.capitalizeFirst}s&#39;,
+      body: &#39;static List&lt;GetPage&gt; get ${AnnotationTypes.page.name}s =&gt; [$pages\n]; $initialPageString $unknownPageString&#39;);
 
-    &#47;&#47;Components
-    for(var component in componentsList) {
-      componentsCodeBody = componentsCodeBody.addLine(_controllerDependencyFormat(component));
-      GeneratorLog.info(title: &#39;Component Added to Pages&#39;, data: component.name, as: component.as);
-    }
+    &#47;&#47;&#47; Add Dependencies
+    for (var controller in controllersList) controllersCodeBody = controllersCodeBody.addLine(_controllerDependencyFormat(controller));
+    for (var component in componentsList) componentsCodeBody = componentsCodeBody.addLine(_controllerDependencyFormat(component));
+    for (var repository in repositoriesList) repositoriesCodeBody = repositoriesCodeBody.addLine(_controllerDependencyFormat(repository));
+    for (var service in servicesList) servicesCodeBody = servicesCodeBody.addLine(_serviceDependencyFormat(service));
 
-    &#47;&#47;Repositories
-    for(var repository in repositoriesList) {
-      repositoriesCodeBody = repositoriesCodeBody.addLine(_controllerDependencyFormat(repository));
-      GeneratorLog.info(title: &#39;Repository Added to Pages&#39;, data: repository.name, as: repository.as);
-    }
-
+    &#47;&#47;&#47; Dependencies CodeBody
     dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.controller.name.capitalizeFirst, body: controllersCodeBody);
     dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.component.name.capitalizeFirst, body: componentsCodeBody);
     dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.repository.name.capitalizeFirst, body: repositoriesCodeBody);
+    dependenciesCodeBody = dependenciesCodeBody.addDependencyClass(className: AnnotationTypes.service.name.capitalizeFirst, body: servicesCodeBody);
 
-    bindingsCodeBody = bindingsCodeBody.addLine(&#39;_$elementsMainName${AnnotationTypes.controller.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();&#39;);
-    bindingsCodeBody = bindingsCodeBody.addLine(&#39;_$elementsMainName${AnnotationTypes.component.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();&#39;);
-    bindingsCodeBody = bindingsCodeBody.addLine(&#39;_$elementsMainName${AnnotationTypes.repository.name.capitalizeFirst}().$generatedFilesDependenciesPostfix();&#39;);
-
+    &#47;&#47;&#47; Dependencies Bindings
+    bindingsCodeBody = bindingsCodeBody.addLine(_addBindingLine(annotation: AnnotationTypes.controller));
+    bindingsCodeBody = bindingsCodeBody.addLine(_addBindingLine(annotation: AnnotationTypes.component));
+    bindingsCodeBody = bindingsCodeBody.addLine(_addBindingLine(annotation: AnnotationTypes.repository));
+    bindingsCodeBody = bindingsCodeBody.addLine(_addBindingLine(annotation: AnnotationTypes.service));
 
     &#47;&#47;&#47; CodeBody Generation
-    mainCodeBody = mainCodeBody.addLine(&#39;library;&#39;).addSpace();
-    mainCodeBody = mainCodeBody.addCommentLine(DescriptionGenerator().generate(all: true)).addSpace();
-    mainCodeBody = mainCodeBody.addLine(importsCodeBody).addSpace();
-    mainCodeBody = mainCodeBody.addLine(statisticsCodeBody).addSpace();
-    mainCodeBody = mainCodeBody.addLine(pagesCodeBody).addSpace();
-    mainCodeBody = mainCodeBody.addBindingClass(body: bindingsCodeBody).addSpace();
-    mainCodeBody = mainCodeBody.addLine(dependenciesCodeBody).addSpace();
+    mainCodeBody = mainCodeBody.addLine(&#39;library;&#39;).addSpaceAfter();
+    mainCodeBody = mainCodeBody.addCommentLine(DescriptionGenerator().generate(all: true)).addSpaceAfter();
+    mainCodeBody = mainCodeBody.addLine(importsCodeBody).addSpaceAfter();
+    mainCodeBody = mainCodeBody.addLine(statisticsCodeBody).addSpaceAfter();
+    mainCodeBody = mainCodeBody.addLine(pagesCodeBody).addSpaceAfter();
+    mainCodeBody = mainCodeBody.addBindingClass(body: bindingsCodeBody).addSpaceAfter();
+    mainCodeBody = mainCodeBody.addLine(dependenciesCodeBody).addSpaceAfter();
 
-    GeneratorLog(title: &#39;Code Generation Finished...&#39;);
+    GeneratorLog(
+      title:
+          &#39;${pagesList.length} Pages,&#39;
+          &#39;${controllersList.length} Controllers, &#39;
+          &#39;${componentsList.length} Components, &#39;
+          &#39;${repositoriesList.length} Repositories, &#39;
+          &#39;${servicesList.length} Services &#39;
+          &#39;Founded and Added...&#39;,
+    );
+    GeneratorLog(title: &#39;Code Generation Completed...&#39;);
   }
 
-  bool canPublish = mainCodeBody.isNotEmpty &amp;&amp; canGenerate;
-  return canPublish ? mainCodeBody : null;
+  return mainCodeBody.isNotEmpty &amp;&amp; canGenerate ? mainCodeBody : null;
 }</code></pre>
 </section>
 
 
   </div> <!-- /.main-content -->
-
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
@@ -211,41 +215,31 @@ FutureOr&lt;String?&gt; generate(LibraryReader library, BuildStep buildStep) asy
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
-
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">getx_binding_annotation_generator</a></li>
-    <li><a href="../../builders_code_generator/builders_code_generator-library.html">code_generator</a></li>
+    <li><a href="../../builders_code_generator/">code_generator</a></li>
     <li><a href="../../builders_code_generator/CodeGenerator-class.html">CodeGenerator</a></li>
     <li class="self-crumb">generate method</li>
 </ol>
 
-
     <h5>CodeGenerator class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
 </div><!--/.sidebar-offcanvas-->
-
 </main>
-
 <footer>
   <span class="no-break">
     getx_binding_annotation_generator
-      0.0.6
+      0.5.1
   </span>
-
   
 </footer>
-
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
 <script src="../../static-assets/docs.dart.js"></script>
 
-
-
 </body>
-
 </html>
 
