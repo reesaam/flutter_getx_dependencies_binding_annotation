@@ -1,6 +1,4 @@
 import 'package:source_gen/source_gen.dart';
-
-import '../components/log.dart';
 import '../resources/strings.dart';
 
 /// Extension on [ConstantReader]
